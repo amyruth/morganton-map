@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import ListSection from './components/ListSection';
+import Header from './components/Header';
 
 class App extends Component {
 	state = {
@@ -86,10 +87,12 @@ getPlaces = () => {
   render() {
 	 
     return (
-      <div className="App">
-
-	  	<ListSection />
-		<div id='map'></div>
+      <div className='App'>
+		<Header />
+		<div className='main'>
+			<ListSection />
+			<div id='map'></div>
+		</div>
 
       </div>
     );
