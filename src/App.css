@@ -7,11 +7,13 @@
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: column;
+	border: 2px solid black;
 }
 
 header {
 	text-align: center;
 	padding: 20px;
+	border: 2px solid black;
 }
 .main {
 	display: flex;
