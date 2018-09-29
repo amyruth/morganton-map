@@ -10,10 +10,10 @@ class App extends Component {
             lat: 35.7454071,
             lng:-81.68481880000002
 		},
-		myPlaces: [],
-		markers: []
+		myPlaces: []
 	}
 
+	
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY&callback=initMap');
 			window.initMap = this.initMap;
@@ -26,6 +26,8 @@ class App extends Component {
 		})
 		console.log('map is loaded');
 
+		let infoWindow = new window.google.maps.InfoWindow();
+		
 		this.state.myPlaces.forEach(function(myPlace, index, array) {
 			let marker = new window.google.maps.Marker({
 				position: {
@@ -33,10 +35,28 @@ class App extends Component {
 					lng: myPlace.venue.location.lng
 				},
 				map: map,
+				animation: window.google.maps.Animation.DROP,
 				title: myPlace.venue.name
+			})
+			
+			//repopulates InfoWindow with clicked marker info
+			window.google.maps.event.addListener(marker, 'click', function() {
+				
+				infoWindow.setContent(`	
+					<div class='infoWin'>
+						<strong>${myPlace.venue.name}</strong>
+						<p>${myPlace.venue.location.formattedAddress[0]}</p>
+						<p>${myPlace.venue.location.formattedAddress[1]}</p>
+					</div>
+				`);
+				infoWindow.open(map, marker);
 			})	
 		})
-			
+		
+		
+		
+		
+
 		// this.state.myPlaces.map( myPlace => {
 		// 	this.marker = new window.google.maps.Marker({
 		// 		position: {
@@ -50,6 +70,7 @@ class App extends Component {
 		// })
 	}
 
+	
 	componentDidMount() {
 		this.getPlaces();
 	}
@@ -57,7 +78,7 @@ class App extends Component {
 getPlaces = () => {
 	const endpoint = 'https://api.foursquare.com/v2/venues/explore';
 	const endpoint2 = 'https://api.foursquare.com/v2/venues/search';
-	
+	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
 			client_id:'HLAAAV43L3SOYXNORDN3HSWFR3ZDVSX4PT4HOQKJBW2PQF00',

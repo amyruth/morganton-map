@@ -30,3 +30,7 @@ header {
 	background-color: rgb(167, 178, 187);
 	border: 1px solid black;
 }
+
+.infoWin {
+	text-align: center;
+}
