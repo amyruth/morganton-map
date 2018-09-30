@@ -17,7 +17,7 @@ class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -33,7 +33,7 @@ class App extends Component {
 		//create markers
 		
 		let infoWindow = new window.google.maps.InfoWindow();
-	
+		let markers = [];
 
 		this.state.myVenues.forEach(function(myVenue, index, array) {
 			let marker = new window.google.maps.Marker({
@@ -46,7 +46,7 @@ class App extends Component {
 				title: myVenue.venue.name,
 				id: myVenue.venue.id
 			})
-			console.log(marker);
+			
 			bounds.extend(marker.position);
 			//populates InfoWindow with location info
 		window.google.maps.event.addListener(marker, 'click', function() {
@@ -61,11 +61,16 @@ class App extends Component {
 				`);
 				infoWindow.open(map, marker);
 			})	
-		
+			markers.push(marker);
+			
+			console.log(markers)
 		})
+		
+		this.setState({markers: markers})
 }
 
 	
+
 	componentDidMount() {
 		this.getPlaces();
 	}
@@ -75,8 +80,8 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'4square',
-			client_secret: '4square',
+			client_id:'***REMOVED***',
+			client_secret: '***REMOVED***',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
