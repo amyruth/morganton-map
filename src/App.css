@@ -59,7 +59,9 @@ header {
 	font-size: 24px;
 }
 
-
+label {
+	font-weight: bold;
+}
 
 li div {
 	border: 1px solid black;
@@ -68,3 +70,7 @@ li div {
 	padding: 20px;
 }
 
+.venueName {
+	font-weight: bold;
+	margin-bottom: 5px;
+}

@@ -16,11 +16,30 @@ class App extends Component {
 		markers: []
 	}
 
+	toggleBounce = () => {
+		if(this.getAnimation() !== null){
+			this.setAnimation(null);
+		} else {
+			this.setAnimation(window.google.maps.Animation.BOUNCE);
+		}
+	}
+
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEY&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
+	makeMarkerIcon = (markerColor) =>  {
+        var markerImage = new window.google.maps.MarkerImage(
+          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+          '|40|_|%E2%80%A2',
+          new window.google.maps.Size(21, 34),
+          new window.google.maps.Point(0, 0),
+          new window.google.maps.Point(10, 34),
+          new window.google.maps.Size(21,34));
+        return markerImage;
+	}
+	  
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
 			center: this.state.initialCenter,
@@ -34,6 +53,8 @@ class App extends Component {
 		
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
+		let defaultIcon = this.makeMarkerIcon('0091ff');
+		let highlightedIcon = this.makeMarkerIcon('FFFF24');
 
 		this.state.myVenues.forEach(function(myVenue, index, array) {
 			let marker = new window.google.maps.Marker({
@@ -44,7 +65,8 @@ class App extends Component {
 				map: map,
 				animation: window.google.maps.Animation.DROP,
 				title: myVenue.venue.name,
-				id: myVenue.venue.id
+				id: myVenue.venue.id,
+				icon: defaultIcon
 			})
 			
 			bounds.extend(marker.position);
@@ -56,11 +78,23 @@ class App extends Component {
 						<p class='infoTitle'>${myVenue.venue.name}</p>
 						<p>${myVenue.venue.location.formattedAddress[0]}</p>
 						<p>${myVenue.venue.location.formattedAddress[1]}</p>
-						<p>${myVenue.venue.categories[0].name}</p>
+						<p>Type: ${myVenue.venue.categories[0].shortName}</p>
 					</div>
 				`);
 				infoWindow.open(map, marker);
-			})	
+				
+		});	
+
+		//bounce marker on hover
+		window.google.maps.event.addListener(marker, 'mouseover', function() {
+			marker.setAnimation(window.google.maps.Animation.BOUNCE)
+		})
+
+		window.google.maps.event.addListener(marker, 'mouseout', function() {
+			marker.setAnimation(null)
+		})
+		
+
 			markers.push(marker);
 			
 			console.log(markers)
@@ -80,8 +114,8 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'4SQUARE',
-			client_secret: '4SQUARE',
+			client_id:'***REMOVED***',
+			client_secret: '***REMOVED***',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
@@ -110,8 +144,11 @@ getPlaces = () => {
 		<Header />
 	
 		<div className='main'>
-			<ListSection myVenues={this.state.myVenues} />
-			<div id='map'></div>
+			<ListSection 
+				myVenues={this.state.myVenues}
+				markers={this.state.markers} 
+			/>
+		<div id='map'></div>
 		</div>
 
       </div>
