@@ -10,12 +10,14 @@ class App extends Component {
             lat: 35.7454071,
             lng:-81.68481880000002
 		},
-		myPlaces: []
+		myVenues: [],
+		filtered: null,
+		query: '',
+		markers: []
 	}
 
-	
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE MAPS KEY&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=APIKEYHERE&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -23,52 +25,45 @@ class App extends Component {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
 			center: this.state.initialCenter,
 			zoom: 13,
+			gestureHandling: 'greedy'
 		})
 		console.log('map is loaded');
 
-		let infoWindow = new window.google.maps.InfoWindow();
+		let bounds = new window.google.maps.LatLngBounds();
+		//create markers
 		
-		this.state.myPlaces.forEach(function(myPlace, index, array) {
+		let infoWindow = new window.google.maps.InfoWindow();
+	
+
+		this.state.myVenues.forEach(function(myVenue, index, array) {
 			let marker = new window.google.maps.Marker({
 				position: {
-					lat: myPlace.venue.location.lat,
-					lng: myPlace.venue.location.lng
+					lat: myVenue.venue.location.lat,
+					lng: myVenue.venue.location.lng
 				},
 				map: map,
 				animation: window.google.maps.Animation.DROP,
-				title: myPlace.venue.name
+				title: myVenue.venue.name,
+				id: myVenue.venue.id
 			})
+			console.log(marker);
+			bounds.extend(marker.position);
+			//populates InfoWindow with location info
+		window.google.maps.event.addListener(marker, 'click', function() {
 			
-			//repopulates InfoWindow with clicked marker info
-			window.google.maps.event.addListener(marker, 'click', function() {
-				
 				infoWindow.setContent(`	
 					<div class='infoWin'>
-						<strong>${myPlace.venue.name}</strong>
-						<p>${myPlace.venue.location.formattedAddress[0]}</p>
-						<p>${myPlace.venue.location.formattedAddress[1]}</p>
+						<p class='infoTitle'>${myVenue.venue.name}</p>
+						<p>${myVenue.venue.location.formattedAddress[0]}</p>
+						<p>${myVenue.venue.location.formattedAddress[1]}</p>
+						<p>${myVenue.venue.categories[0].name}</p>
 					</div>
 				`);
 				infoWindow.open(map, marker);
 			})	
+		
 		})
-		
-		
-		
-		
-
-		// this.state.myPlaces.map( myPlace => {
-		// 	this.marker = new window.google.maps.Marker({
-		// 		position: {
-		// 			lat: myPlace.location.lat,
-		// 			lng: myPlace.location.lng
-		// 		},
-		// 		map: map,
-		// 		title: myPlace.name,
-		// 		radius: 20
-		// 	})
-		// })
-	}
+}
 
 	
 	componentDidMount() {
@@ -77,28 +72,23 @@ class App extends Component {
 
 getPlaces = () => {
 	const endpoint = 'https://api.foursquare.com/v2/venues/explore';
-	const endpoint2 = 'https://api.foursquare.com/v2/venues/search';
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'4SQUARE',
-			client_secret: '4SQUARE',
+			client_id:'4square',
+			client_secret: '4square',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
-			// query: 'coffee',
 			near: 'Morganton'
 		}			
 	})
 	.then((res) => {
-		if(res.status === 200) {
-			console.log(res.status);
-			console.log('locations retrieved');
-			console.log(res.data.response.groups[0].items);
-			// this.setState({myPlaces: res.data.response.venues});
-			this.setState({myPlaces: res.data.response.groups[0].items});
-			console.log(this.state.myPlaces);
-		}
+		console.log("Response from server: " + res.status);
+		console.log('locations retrieved');
+		console.log(res.data.response.groups[0].items);
+		this.setState({myVenues: res.data.response.groups[0].items});
+		console.log(this.state.myVenues);
 	})
 	.then( () => {
 		this.loadMap();
@@ -106,15 +96,16 @@ getPlaces = () => {
 	.catch(error => console.log("Error " + error));
 }
 
-	
+
 	
   render() {
 	 
     return (
       <div className='App'>
 		<Header />
+	
 		<div className='main'>
-			<ListSection />
+			<ListSection myVenues={this.state.myVenues} />
 			<div id='map'></div>
 		</div>
 

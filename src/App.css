@@ -3,17 +3,22 @@
 	padding: 0;
 }
 
+#root {
+	overflow: hidden;
+}
 .App {
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: column;
 	border: 2px solid black;
+
 }
 
 header {
 	text-align: center;
 	padding: 20px;
-	border: 2px solid black;
+	
+	width: 100%;
 }
 .main {
 	display: flex;
@@ -25,12 +30,41 @@ header {
 }
 
 .sidebar {
-	width:	25%;
+	width:	40%;
 	height: 100vh;
 	background-color: rgb(167, 178, 187);
 	border: 1px solid black;
+	overflow-y: scroll;
 }
 
+.search-section {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+#searchbar {
+	height: 30px;
+	margin-top: 10px;
+}
 .infoWin {
 	text-align: center;
+	font-size: 18px;
 }
+.infoWin p:nth-child(n+2) {
+	margin-top: 3px;
+}
+.infoTitle {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+
+
+li div {
+	border: 1px solid black;
+	margin: 10px;
+	background-color: #fff;
+	padding: 20px;
+}
+
