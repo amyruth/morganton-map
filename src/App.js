@@ -13,26 +13,23 @@ class App extends Component {
             lng:-81.68481880000002
 		},
 		myVenues: [],
-		filtered: null,
+		
 		searchQuery: '',
 		markers: [],
 		listItems: []
 	}
 
 	setQuery = (e) => {
-		this.setState({searchQuery: e.target.value});
+		this.setState({searchQuery: e});
 		console.log(e);
-		// this.filterMarkers(searchQuery);
+		// this.filterMarkers(e);
 	}
 
-	filterMarkers(searchQuery) {
+	filterMarkers = (query) => {
 		// grab all list items
 		// convert query and venue name .toLowerCase()
 		// compare them
-		// if not a match add hidden class to list item
-		if(searchQuery){
-			
-		}
+		// if not a match add hidden class to list item	
 		
 	}
 
@@ -46,7 +43,7 @@ class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPI&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -76,8 +73,9 @@ class App extends Component {
 		let markers = [];
 		let defaultIcon = this.makeMarkerIcon('0091ff');
 		let highlightedIcon = this.makeMarkerIcon('FFFF24');
+		let copyVenues = this.state.myVenues.map(venue => venue);
 
-		this.state.myVenues.forEach(function(myVenue, index, array) {
+		copyVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
 				position: {
 					lat: myVenue.venue.location.lat,
@@ -115,10 +113,10 @@ class App extends Component {
 			marker.setAnimation(null)
 		})
 		
-			markers.push(marker);
+			myVenue.marker = marker;
 		})
 		
-		this.setState({markers: markers})
+		this.setState({myVenues: copyVenues});
 }
 
 	
@@ -132,8 +130,8 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'4square',
-			client_secret: '4square',
+			client_id:'***REMOVED***',
+			client_secret: '***REMOVED***',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
