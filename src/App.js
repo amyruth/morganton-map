@@ -25,7 +25,7 @@ class App extends Component {
 		// this.filterMarkers(e);
 	}
 
-	filterMarkers = (query) => {
+	filterMarkers = (searchTerm) => {
 		// grab all list items
 		// convert query and venue name .toLowerCase()
 		// compare them
@@ -114,9 +114,11 @@ class App extends Component {
 		})
 		
 			myVenue.marker = marker;
+			markers.push(marker);
 		})
 		
 		this.setState({myVenues: copyVenues});
+		this.setState({ markers: markers });
 }
 
 	
@@ -164,7 +166,7 @@ getPlaces = () => {
 			<ListSection 
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
-				query={this.state.searchQuery}
+				searchQuery={this.state.searchQuery}
 				setQuery={this.setQuery}
 				value={this.state.searchQuery}
 				filterMarkers={this.filterMarkers}
