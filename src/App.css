@@ -63,6 +63,14 @@ label {
 	font-weight: bold;
 }
 
+.listing {
+	color: green;
+}
+
+.hidden {
+	display: none;
+}
+
 li div {
 	border: 1px solid black;
 	margin: 10px;
