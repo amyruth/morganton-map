@@ -4,6 +4,8 @@ import axios from 'axios';
 import ListSection from './components/ListSection';
 import Header from './components/Header';
 
+
+
 class App extends Component {
 	state = {
 		initialCenter: {
@@ -12,9 +14,28 @@ class App extends Component {
 		},
 		myVenues: [],
 		filtered: null,
-		query: '',
-		markers: []
+		searchQuery: '',
+		markers: [],
+		listItems: []
 	}
+
+	setQuery = (e) => {
+		this.setState({searchQuery: e.target.value});
+		console.log(e);
+		// this.filterMarkers(searchQuery);
+	}
+
+	filterMarkers(searchQuery) {
+		// grab all list items
+		// convert query and venue name .toLowerCase()
+		// compare them
+		// if not a match add hidden class to list item
+		if(searchQuery){
+			
+		}
+		
+	}
+
 
 	toggleBounce = () => {
 		if(this.getAnimation() !== null){
@@ -25,7 +46,7 @@ class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPI&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -94,10 +115,7 @@ class App extends Component {
 			marker.setAnimation(null)
 		})
 		
-
 			markers.push(marker);
-			
-			console.log(markers)
 		})
 		
 		this.setState({markers: markers})
@@ -114,8 +132,8 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'***REMOVED***',
-			client_secret: '***REMOVED***',
+			client_id:'4square',
+			client_secret: '4square',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
@@ -136,6 +154,7 @@ getPlaces = () => {
 }
 
 
+
 	
   render() {
 	 
@@ -146,7 +165,12 @@ getPlaces = () => {
 		<div className='main'>
 			<ListSection 
 				myVenues={this.state.myVenues}
-				markers={this.state.markers} 
+				markers={this.state.markers}
+				query={this.state.searchQuery}
+				setQuery={this.setQuery}
+				value={this.state.searchQuery}
+				filterMarkers={this.filterMarkers}
+				listItems={this.state.listItems}
 			/>
 		<div id='map'></div>
 		</div>

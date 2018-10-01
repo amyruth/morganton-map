@@ -7,13 +7,15 @@ class ListSection extends Component {
 			<div className='sidebar'>
 				<div className='search-section'>
 					<label htmlFor='searchbar'>Search Restaurants</label>
-					<input type='text' id='searchbar'></input>
+					<input type='text' id='searchbar' 
+					value={this.props.searchQuery}
+					onChange={this.props.setQuery} />
                     
 				</div>
 
 				<ul id='venues'>
 					{this.props.myVenues.map( myVenue => (
-						<li key={myVenue.venue.id}>
+						<li className='listing' key={myVenue.venue.id}>
 							<div>
 							<p className='venueName'>{myVenue.venue.name}</p>
 							<p>{myVenue.venue.location.formattedAddress[0]}</p>
@@ -21,8 +23,10 @@ class ListSection extends Component {
 							<p>Type: {myVenue.venue.categories[0].shortName}</p>
 							</div>
 						</li>
-					))}
-				
+					))
+					
+					}
+					
 
 				</ul>
 			</div>
