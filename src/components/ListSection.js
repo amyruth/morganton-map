@@ -9,7 +9,7 @@ class ListSection extends Component {
 					<label htmlFor='searchbar'>Search Restaurants</label>
 					<input type='text' id='searchbar' 
 					value={this.props.searchQuery}
-					onChange={this.props.setQuery} />
+					onChange={(e) => this.props.setQuery(e.target.value)} />
                     
 				</div>
 
