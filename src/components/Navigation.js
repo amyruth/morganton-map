@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import VenueList from './VenueList';
 class Navigation extends Component {
 
 
@@ -16,20 +16,8 @@ class Navigation extends Component {
                     
 				</div>
 
-				<ul id='venues'>
-					{this.props.myVenues.map( myVenue => (
-						<li className='listing' key={myVenue.venue.id}
-							onClick={this.props.liClickHandler}
-						>
-							
-							<p className='venueName'>{myVenue.venue.name}</p>
-							<p>{myVenue.venue.location.formattedAddress[0]}</p>
-							<p>{myVenue.venue.location.formattedAddress[1]}</p>
-							<p>Type: {myVenue.venue.categories[0].shortName}</p>
-							
-						</li>
-					))}
-				</ul>
+				<VenueList myVenues={this.props.myVenues}
+					listClickHandler={this.props.listClickHandler} />
 			</nav>
 		);
 	}
