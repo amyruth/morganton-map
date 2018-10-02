@@ -65,6 +65,10 @@ label {
 
 .listing {
 	color: green;
+	border: 1px solid black;
+	margin: 10px;
+	background-color: white;
+	padding: 10px;
 }
 
 .hidden {
