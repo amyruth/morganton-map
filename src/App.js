@@ -22,7 +22,7 @@ class App extends Component {
 		console.log(item);
 		
 		console.log(this.state.markers);
-		this.state.markers.map(marker => {
+		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
 				window.google.maps.event.trigger(marker, 'click');
 			}
@@ -131,9 +131,9 @@ getPlaces = () => {
 	.then((res) => {
 		console.log("Response from server: " + res.status);
 		console.log('locations retrieved');
-		console.log(res.data.response.groups[0].items);
+		// console.log(res.data.response.groups[0].items);
 		this.setState({myVenues: res.data.response.groups[0].items});
-		console.log(this.state.myVenues);
+		// console.log(this.state.myVenues);
 	})
 	.then( () => {
 		this.loadMap();
