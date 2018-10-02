@@ -54,18 +54,13 @@ class App extends Component {
 				}
 			})
 		}
-		if(query = '') {
-			listings.forEach(listing => {
-				if(listing.classList.contains('hidden')) {
-					listing.classList.remove('hidden')
-				}
-			})
+		
 		}
-	}
+	
 
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS&callback=initMap');
 			window.initMap = this.initMap;
 	}
 	  
@@ -131,8 +126,8 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id: 'HLAAAV43L3SOYXNORDN3HSWFR3ZDVSX4PT4HOQKJBW2PQF00',
-			client_secret: 'T2GVYKXUO3HRINYCYFPMYAILORVV4T3LOOWY2N4O5QLERGBC',
+			client_id: '4SQUARE',
+			client_secret: '4SQUARE',
 			v: 20180922,
 			ll: '35.7454,-81.6848',
 			section: 'food',
