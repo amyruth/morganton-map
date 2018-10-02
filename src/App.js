@@ -11,7 +11,7 @@ class App extends Component {
             lng:-81.68481880000002
 		},
 		myVenues: [],
-		
+		filteredList: [],
 		searchQuery: '',
 		markers: [],
 		listItems: [],
@@ -20,38 +20,49 @@ class App extends Component {
 	listClickHandler = (item) => {
 		console.log('item clicked');
 		console.log(item);
-		
-		console.log(this.state.markers);
+		console.log(item.venue.name)
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
 				window.google.maps.event.trigger(marker, 'click');
+					
 			}
 		})
 	}
 
-	// if marker.key === item.venue.id open infowindow
-
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		console.log(e);
-		// this.filterMarkers(e);
+		this.filterMarkers(e);
 	}
 
-	filterMarkers = (searchTerm) => {
+	filterMarkers = (query) => {
 		// grab all list items
 		// convert query and venue name .toLowerCase()
 		// compare them
 		// if not a match add hidden class to list item	
-		
+		// if no match AND class hidden is not present
+		let listings = document.querySelectorAll('.listing');
+		let copyMarkers = this.state.markers.map( marker => marker)
+
+		if(query) {
+			query = query.toLowerCase();
+			listings.forEach( listing => {
+				
+				if((listing.innerText.toLowerCase().includes(query) === false) && (listing.classList.contains('hidden') === false)) {
+					listing.classList.add('hidden');	
+					console.log(listing.key)				
+				}
+			})
+		}
+		if(query = '') {
+			listings.forEach(listing => {
+				if(listing.classList.contains('hidden')) {
+					listing.classList.remove('hidden')
+				}
+			})
+		}
 	}
 
-	// toggleBounce = () => {
-	// 	if(this.getAnimation() !== null){
-	// 		this.setAnimation(null);
-	// 	} else {
-	// 		this.setAnimation(window.google.maps.Animation.BOUNCE);
-	// 	}
-	// }
 
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
@@ -84,10 +95,12 @@ class App extends Component {
 				key: myVenue.venue.id
 			})
 			
-			bounds.extend(marker.position);
-			//populates InfoWindow with location info
-		window.google.maps.event.addListener(marker, 'click', function() {
 			
+			bounds.extend(marker.position);
+			
+			
+
+		window.google.maps.event.addListener(marker, 'click', function() {
 			infoWindow.setContent(`	
 				<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
@@ -104,8 +117,10 @@ class App extends Component {
 		})
 		
 		this.setState({myVenues: copyVenues});
+		this.setState({filteredList: copyVenues});
 		this.setState({ markers: markers });
 }
+
 
 	componentDidMount() {
 		this.getPlaces();
@@ -116,7 +131,7 @@ getPlaces = () => {
 	console.log('grabbing locations');
 	axios.get(endpoint, {
 		params: {
-			client_id:'***REMOVED***',
+			client_id: '***REMOVED***',
 			client_secret: '***REMOVED***',
 			v: 20180922,
 			ll: '35.7454,-81.6848',

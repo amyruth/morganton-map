@@ -6,6 +6,7 @@ const VenueList = props => {
 	return (
 		<ul className='venues'>
 			<ListItem myVenues={props.myVenues}
+				
 				listClickHandler={props.listClickHandler} 
 			/>
 		</ul>
