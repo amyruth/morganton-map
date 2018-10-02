@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import VenueList from './VenueList';
 class Navigation extends Component {
 
-
-	
 	render() {
 		return (
 			<nav className='sidebar'>
@@ -13,11 +11,11 @@ class Navigation extends Component {
 							value={this.props.searchQuery}
 							onChange={(e) => this.props.setQuery(e.target.value)} 
 						/>
-                    
-				</div>
+                </div>
 
 				<VenueList myVenues={this.props.myVenues}
-					listClickHandler={this.props.listClickHandler} />
+					listClickHandler={this.props.listClickHandler} 
+				/>
 			</nav>
 		);
 	}
