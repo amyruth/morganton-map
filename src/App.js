@@ -3,8 +3,6 @@ import './App.css';
 import axios from 'axios';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-
 
 class App extends Component {
 	state = {
@@ -19,8 +17,8 @@ class App extends Component {
 		listItems: [],
 	}
 
-	liClickHandler = (item) => {
-		console.log(item);
+	listClickHandler = () => {
+		console.log('item clicked');
 	}
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
@@ -49,17 +47,6 @@ class App extends Component {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}
-
-	makeMarkerIcon = (markerColor) =>  {
-        var markerImage = new window.google.maps.MarkerImage(
-          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-          '|40|_|%E2%80%A2',
-          new window.google.maps.Size(21, 34),
-          new window.google.maps.Point(0, 0),
-          new window.google.maps.Point(10, 34),
-          new window.google.maps.Size(21,34));
-        return markerImage;
-	}
 	  
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -70,14 +57,11 @@ class App extends Component {
 		console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
-		//create markers
-		
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
-		let defaultIcon = this.makeMarkerIcon('0091ff');
-		let highlightedIcon = this.makeMarkerIcon('FFFF24');
 		let copyVenues = this.state.myVenues.map(venue => venue);
-
+		
+		//create markers
 		copyVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
 				position: {
@@ -87,8 +71,7 @@ class App extends Component {
 				map: map,
 				animation: window.google.maps.Animation.DROP,
 				title: myVenue.venue.name,
-				key: myVenue.venue.id,
-				icon: defaultIcon
+				key: myVenue.venue.id
 			})
 			
 			bounds.extend(marker.position);
@@ -107,15 +90,6 @@ class App extends Component {
 				
 		});	
 
-		//bounce marker on hover
-		window.google.maps.event.addListener(marker, 'mouseover', function() {
-			marker.setAnimation(window.google.maps.Animation.BOUNCE)
-		})
-
-		window.google.maps.event.addListener(marker, 'mouseout', function() {
-			marker.setAnimation(null)
-		})
-		
 			myVenue.marker = marker;
 			markers.push(marker);
 		})
@@ -167,7 +141,7 @@ getPlaces = () => {
 	
 		<div className='main'>
 			<Navigation 
-				liClickHandler={this.liClickHandler}
+				listClickHandler={this.listClickHandler}
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
 				searchQuery={this.state.searchQuery}
@@ -176,7 +150,7 @@ getPlaces = () => {
 				filterMarkers={this.filterMarkers}
 				listItems={this.state.listItems}
 			/>
-		<div id='map'></div>
+			<div id='map'></div>
 		</div>
 
       </div>
