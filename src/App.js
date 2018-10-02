@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import ListSection from './components/ListSection';
+import Navigation from './components/Navigation';
 import Header from './components/Header';
-
+import SearchBar from './components/SearchBar';
 
 
 class App extends Component {
@@ -16,9 +16,12 @@ class App extends Component {
 		
 		searchQuery: '',
 		markers: [],
-		listItems: []
+		listItems: [],
 	}
 
+	liClickHandler = (item) => {
+		console.log(item);
+	}
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		console.log(e);
@@ -84,7 +87,7 @@ class App extends Component {
 				map: map,
 				animation: window.google.maps.Animation.DROP,
 				title: myVenue.venue.name,
-				id: myVenue.venue.id,
+				key: myVenue.venue.id,
 				icon: defaultIcon
 			})
 			
@@ -163,7 +166,8 @@ getPlaces = () => {
 		<Header />
 	
 		<div className='main'>
-			<ListSection 
+			<Navigation 
+				liClickHandler={this.liClickHandler}
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
 				searchQuery={this.state.searchQuery}

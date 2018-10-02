@@ -7,7 +7,7 @@ class SearchBar extends Component {
 					<label htmlFor='searchbar'>Search Restaurants</label>
 					<input type='text' id='searchbar'
 						value={this.props.searchQuery}
-						onChange={ (e) => this.props.setQuer(e.target.value)} 
+						onChange={ (e) => this.props.setQuery(e.target.value)} 
 					 />            
 			</div>
 		);
