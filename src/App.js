@@ -45,14 +45,13 @@ class App extends Component {
 		
 	}
 
-
-	toggleBounce = () => {
-		if(this.getAnimation() !== null){
-			this.setAnimation(null);
-		} else {
-			this.setAnimation(window.google.maps.Animation.BOUNCE);
-		}
-	}
+	// toggleBounce = () => {
+	// 	if(this.getAnimation() !== null){
+	// 		this.setAnimation(null);
+	// 	} else {
+	// 		this.setAnimation(window.google.maps.Animation.BOUNCE);
+	// 	}
+	// }
 
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY&callback=initMap');
@@ -89,16 +88,15 @@ class App extends Component {
 			//populates InfoWindow with location info
 		window.google.maps.event.addListener(marker, 'click', function() {
 			
-				infoWindow.setContent(`	
-					<div class='infoWin'>
-						<p class='infoTitle'>${myVenue.venue.name}</p>
-						<p>${myVenue.venue.location.formattedAddress[0]}</p>
-						<p>${myVenue.venue.location.formattedAddress[1]}</p>
-						<p>Type: ${myVenue.venue.categories[0].shortName}</p>
-					</div>
-				`);
-				infoWindow.open(map, marker);
-				
+			infoWindow.setContent(`	
+				<div class='infoWin'>
+					<p class='infoTitle'>${myVenue.venue.name}</p>
+					<p>${myVenue.venue.location.formattedAddress[0]}</p>
+					<p>${myVenue.venue.location.formattedAddress[1]}</p>
+					<p>Type: ${myVenue.venue.categories[0].shortName}</p>
+				</div>
+			`);
+			infoWindow.open(map, marker);
 		});	
 
 			myVenue.marker = marker;
@@ -108,8 +106,6 @@ class App extends Component {
 		this.setState({myVenues: copyVenues});
 		this.setState({ markers: markers });
 }
-
-	
 
 	componentDidMount() {
 		this.getPlaces();
