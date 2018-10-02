@@ -3,7 +3,9 @@ import React from 'react';
 const Header = () => {
 	return (
 		<header>
-			<h1>Where to eat in Morganton</h1>
+			<h1>
+				Morganton Meal Map
+			</h1>
 		</header>
 	);
 };
