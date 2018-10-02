@@ -17,8 +17,9 @@ class App extends Component {
 		listItems: [],
 	}
 
-	listClickHandler = () => {
+	listClickHandler = (venue) => {
 		console.log('item clicked');
+		console.log(venue);
 	}
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
