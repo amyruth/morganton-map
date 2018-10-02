@@ -5,7 +5,6 @@ const ListItem = props => props.myVenues.map( myVenue =>{
 		return (
 			<li className='listing' key={myVenue.venue.id}
 				onClick={ () => props.listClickHandler(myVenue)}
-				
 			>
 				<p className='venueName'>{myVenue.venue.name}</p>
 				<p>{myVenue.venue.location.formattedAddress[0]}</p>
