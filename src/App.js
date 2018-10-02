@@ -17,10 +17,20 @@ class App extends Component {
 		listItems: [],
 	}
 
-	listClickHandler = (venue) => {
+	listClickHandler = (item) => {
 		console.log('item clicked');
-		console.log(venue);
+		console.log(item);
+		
+		console.log(this.state.markers);
+		this.state.markers.map(marker => {
+			if(item.venue.id === marker.key) {
+				window.google.maps.event.trigger(marker, 'click');
+			}
+		})
 	}
+
+	// if marker.key === item.venue.id open infowindow
+
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		console.log(e);
