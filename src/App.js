@@ -23,18 +23,12 @@ class App extends Component {
 		console.log(item.venue.name)
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
-				window.google.maps.event.trigger(marker, 'click');		
+				window.google.maps.event.trigger(marker, 'click');	
+				marker.setAnimation(window.google.maps.Animation.BOUNCE)	
+			}else {
+				marker.setAnimation(null);
 			}
 		})
-	}
-
-	
-	toggleBounce = () => {
-		if (this.marker.getAnimation() !== null) {
-		 this.marker.setAnimation(null);
-		} else {
-		  this.marker.setAnimation(window.google.maps.Animation.BOUNCE);
-		}
 	}
 	
 	setQuery = (e) => {
@@ -72,22 +66,17 @@ class App extends Component {
 			})
 			
 			copyMarkers.forEach(marker => marker.title.toLowerCase().includes(query) ? 
-				marker.setVisible(true) :
-				marker.setVisible(false)	
+				marker.setVisible(true) : marker.setVisible(false)	
 			)
 		}
 		this.setState({markers: copyMarkers});
 		console.table(this.state.markers);
-	}
-	
-
+	}	  
 
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
-	}
-	  
-	
+	}	
 
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -101,7 +90,7 @@ class App extends Component {
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
-
+		  
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -128,11 +117,10 @@ class App extends Component {
 					<p>Type: ${myVenue.venue.categories[0].shortName}</p>
 				</div>
 			`);
-
-			infoWindow.open(map, marker);		
+			infoWindow.open(map, marker);
 		});	
 
-		//This closes the infowindow if the user goes to the search input. It was floating unattached before and I couldn't figure out how to reference the infowindow outside of this function.
+		//This closes the infowindow if the user goes to the search input and the marker disappears. It was floating unattached before and I couldn't figure out how to reference the infowindow outside of this function.
 		window.google.maps.event.addListener(marker, 'visible_changed', () => {
 			infoWindow.close();
 		})
