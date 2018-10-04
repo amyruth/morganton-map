@@ -4,7 +4,7 @@ const Header = () => {
 	return (
 		<header>
 			<h1>
-				Morganton Meal Map
+				MMM - Middle of Morganton Meals
 			</h1>
 		</header>
 	);
