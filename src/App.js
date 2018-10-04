@@ -14,7 +14,7 @@ class App extends Component {
 		filteredList: [],
 		searchQuery: '',
 		markers: [],
-		listItems: [],
+		listItems: []
 	}
 	
 	listClickHandler = (item) => {
@@ -28,6 +28,15 @@ class App extends Component {
 		})
 	}
 
+	
+	toggleBounce = () => {
+		if (this.marker.getAnimation() !== null) {
+		 this.marker.setAnimation(null);
+		} else {
+		  this.marker.setAnimation(window.google.maps.Animation.BOUNCE);
+		}
+	}
+	
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		console.log(e);
@@ -38,8 +47,8 @@ class App extends Component {
 		let listings = document.querySelectorAll('.listing');
 		let venues = this.state.myVenues.map(myVenue => myVenue);
 		let copyMarkers = this.state.markers.map( marker => marker);
-
 		query = query.toLowerCase();
+		
 
 		console.log('venues copied', venues);
 		console.log('markers copied', copyMarkers);
@@ -54,7 +63,6 @@ class App extends Component {
 		if(query) {
 			query = query.toLowerCase();
 			listings.forEach( listing => {
-				
 				if((!listing.title.toLowerCase().includes(query)) ) {
 					listing.classList.add('hidden');	
 					console.log(listing.title);				
@@ -79,6 +87,8 @@ class App extends Component {
 			window.initMap = this.initMap;
 	}
 	  
+	
+
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
 			center: this.state.initialCenter,
@@ -91,7 +101,7 @@ class App extends Component {
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
-		
+
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -105,12 +115,11 @@ class App extends Component {
 				key: myVenue.venue.id
 			})
 			
-			
 			bounds.extend(marker.position);
-			
-			
+		
 
-		window.google.maps.event.addListener(marker, 'click', function() {
+		window.google.maps.event.addListener(marker, 'click', () => {
+			
 			infoWindow.setContent(`	
 				<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
@@ -119,22 +128,23 @@ class App extends Component {
 					<p>Type: ${myVenue.venue.categories[0].shortName}</p>
 				</div>
 			`);
-			infoWindow.open(map, marker);
+
+			infoWindow.open(map, marker);		
 		});	
 
-			myVenue.marker = marker;
-			markers.push(marker);
+		//This closes the infowindow if the user goes to the search input. It was floating unattached before and I couldn't figure out how to reference the infowindow outside of this function.
+		window.google.maps.event.addListener(marker, 'visible_changed', () => {
+			infoWindow.close();
 		})
 		
+		myVenue.marker = marker;
+		markers.push(marker);
+	})
 		this.setState({myVenues: copyOfVenues});
-		this.setState({filteredList: copyOfVenues});
+		// this.setState({filteredList: copyOfVenues});
 		this.setState({ markers: markers });
 	}
-
-	componentDidMount() {
-		this.getPlaces();
-	}
-
+	
 	getPlaces = () => {
 		const endpoint = 'https://api.foursquare.com/v2/venues/explore';
 		console.log('grabbing locations');
@@ -160,12 +170,12 @@ class App extends Component {
 		})
 		.catch(error => console.log("Error " + error));
 	}
-
-
-
 	
-  render() {
-	 
+	componentDidMount() {
+		this.getPlaces();
+	}
+
+	render() { 
     return (
       <div className='App'>
 		<Header />
@@ -183,7 +193,6 @@ class App extends Component {
 			/>
 			<div id='map'></div>
 		</div>
-
       </div>
     );
   }
