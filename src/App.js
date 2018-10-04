@@ -108,6 +108,12 @@ class App extends Component {
 		
 
 		window.google.maps.event.addListener(marker, 'click', () => {
+
+			markers.forEach(marker => {
+				if(marker.getAnimation() !== null) {
+					marker.setAnimation(null);
+				}
+			})
 			
 			infoWindow.setContent(`	
 				<div class='infoWin'>
@@ -129,7 +135,7 @@ class App extends Component {
 		markers.push(marker);
 	})
 		this.setState({myVenues: copyOfVenues});
-		// this.setState({filteredList: copyOfVenues});
+		
 		this.setState({ markers: markers });
 	}
 	
