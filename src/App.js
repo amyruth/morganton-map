@@ -11,7 +11,6 @@ class App extends Component {
             lng:-81.68481880000002
 		},
 		myVenues: [],
-		filteredList: [],
 		searchQuery: '',
 		markers: [],
 		listItems: []
@@ -24,9 +23,7 @@ class App extends Component {
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
 				window.google.maps.event.trigger(marker, 'click');	
-				marker.setAnimation(window.google.maps.Animation.BOUNCE)	
-			}else {
-				marker.setAnimation(null);
+				// marker.setAnimation(window.google.maps.Animation.BOUNCE)	
 			}
 		})
 	}
@@ -114,7 +111,7 @@ class App extends Component {
 					marker.setAnimation(null);
 				}
 			})
-			
+
 			infoWindow.setContent(`	
 				<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
@@ -124,6 +121,7 @@ class App extends Component {
 				</div>
 			`);
 			infoWindow.open(map, marker);
+			marker.setAnimation(window.google.maps.Animation.BOUNCE);
 		});	
 
 		//This closes the infowindow if the user goes to the search input and the marker disappears. It was floating unattached before and I couldn't figure out how to reference the infowindow outside of this function.
