@@ -6,7 +6,7 @@ class Navigation extends Component {
 		return (
 			<nav className='sidebar'>
 				<div className='search-section'>
-					<label htmlFor='searchbar'>Search Restaurants</label>
+					<label htmlFor='searchbar'>Search Restaurants by Name</label>
 						<input type='text' id='searchbar' 
 							value={this.props.searchQuery}
 							onChange={(e) => this.props.setQuery(e.target.value)} 
