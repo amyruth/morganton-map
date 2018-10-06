@@ -10,6 +10,8 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	height: 100vh;
+	background-color: aqua;
 }
 
 /* header {
@@ -22,10 +24,15 @@
 	align-items: center;
 	border: 1px solid firebrick;
 } */
+html {
+	background-color: black;
+	/* remove when finished */
+}
 .main {
 	display: flex;
 	height: 100%;
 	justify-content: center;
+	background-color: slategrey;
 	
 }
 #map {
