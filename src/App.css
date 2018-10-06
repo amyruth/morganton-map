@@ -10,33 +10,33 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	border: 2px solid black;
-
 }
 
 header {
 	text-align: center;
+	background-color: cadetblue;
 	padding: 20px;
 	height: 10%;
 	width: 100%;
 }
 .main {
 	display: flex;
-	height: 90%;
+	height: 100%;
 	justify-content: center;
 	
 }
 #map {
 	height: 100vh;
-	width: 60%;
+	width: 70%;
 }
 
 .sidebar {
-	width:	40%;
+	width:	30%;
 	height: 100vh;
 	background-color: moccasin;
-	border: 1px solid black;
+	
 	overflow: scroll;
+	
 }
 
 .search-section {
