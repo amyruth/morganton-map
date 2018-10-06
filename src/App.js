@@ -19,18 +19,16 @@ class App extends Component {
 	listClickHandler = (item) => {
 		console.log('item clicked');
 		console.log(item);
-		console.log(item.venue.name)
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
 				window.google.maps.event.trigger(marker, 'click');	
-				// marker.setAnimation(window.google.maps.Animation.BOUNCE)	
 			}
 		})
 	}
 	
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
-		console.log(e);
+		// console.log(e);
 		this.filterResults(e);
 	}
 
@@ -71,7 +69,7 @@ class App extends Component {
 	}	  
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=googlekey&callback=initMap');
 			window.initMap = this.initMap;
 	}	
 
@@ -87,7 +85,7 @@ class App extends Component {
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
-		  
+		
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -98,20 +96,17 @@ class App extends Component {
 				map: map,
 				animation: window.google.maps.Animation.DROP,
 				title: myVenue.venue.name,
-				key: myVenue.venue.id
+				key: myVenue.venue.id,
+				isSelected: false
 			})
 			
 			bounds.extend(marker.position);
 		
 
 		window.google.maps.event.addListener(marker, 'click', () => {
-
-			markers.forEach(marker => {
-				if(marker.getAnimation() !== null) {
-					marker.setAnimation(null);
-				}
-			})
-
+		
+			
+			
 			infoWindow.setContent(`	
 				<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
@@ -119,22 +114,24 @@ class App extends Component {
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
 					<p>Type: ${myVenue.venue.categories[0].shortName}</p>
 				</div>
-			`);
-			infoWindow.open(map, marker);
-			marker.setAnimation(window.google.maps.Animation.BOUNCE);
-		});	
-
-		//This closes the infowindow if the user goes to the search input and the marker disappears. It was floating unattached before and I couldn't figure out how to reference the infowindow outside of this function.
-		window.google.maps.event.addListener(marker, 'visible_changed', () => {
-			infoWindow.close();
+				`);
+				infoWindow.open(map, marker);
+				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
+				setTimeout(marker.setAnimation(null), 1600);
+			});	
+			
+			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
+			window.google.maps.event.addListener(marker, 'visible_changed', () => {
+				infoWindow.close();
+			})
+			
+			myVenue.marker = marker;
+			markers.push(marker);
 		})
-		
-		myVenue.marker = marker;
-		markers.push(marker);
-	})
+		this.setState({ markers: markers });
 		this.setState({myVenues: copyOfVenues});
 		
-		this.setState({ markers: markers });
+		console.log('updated markers');
 	}
 	
 	getPlaces = () => {
@@ -142,8 +139,8 @@ class App extends Component {
 		console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '***REMOVED***',
-				client_secret: '***REMOVED***',
+				client_id: '4square',
+				client_secret: '4square',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
@@ -153,7 +150,7 @@ class App extends Component {
 		.then((res) => {
 			console.log("Response from server: " + res.status);
 			console.log('locations retrieved');
-			console.log(res.data.response.groups[0].items);
+			// console.log(res.data.response.groups[0].items);
 			this.setState({myVenues: res.data.response.groups[0].items});
 			// console.log(this.state.myVenues);
 		})
