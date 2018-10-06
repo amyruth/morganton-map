@@ -1,0 +1,20 @@
+.search-section {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	text-align: center;
+}
+
+label {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+#searchbar {
+	height: 2rem;
+	width: 225px;
+	margin-top: 10px;
+	font-size: 1rem;
+	align-self: center;
+}
+

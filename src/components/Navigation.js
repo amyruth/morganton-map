@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList';
+import './Navigation.css';
+
 class Navigation extends Component {
 
 	render() {
 		return (
-			<nav className='sidebar'>
+			<nav className='sidebar main-menu'>
+
+				
+
 				<div className='search-section'>
-					<label htmlFor='searchbar'>Search Restaurants by Name</label>
-						<input type='text' id='searchbar' 
+					<label htmlFor='searchbar'>Search</label>
+						<input type='text' id='searchbar'
+							placeholder='Search restaurants by name' 
 							value={this.props.searchQuery}
 							onChange={(e) => this.props.setQuery(e.target.value)} 
 						/>
