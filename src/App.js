@@ -170,6 +170,7 @@ class App extends Component {
 		console.log('nav clicked');
 		document.querySelector('.sidebar').classList.toggle('open');
 	}
+	
 	render() { 
     return (
       <div className='App'>
