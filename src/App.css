@@ -2,6 +2,10 @@
 	margin: 0;
 	padding: 0;
 }
+html, body, #root, .App, main {
+	height: 100vh;
+	width: 100%;
+}
 
 #root {
 	overflow: hidden;
@@ -36,7 +40,7 @@ html {
 	
 }
 #map {
-	height: calc(100vh - 101px);
+	height: calc(100vh - 80px);
 	width: 100%;
 }
 
@@ -78,7 +82,7 @@ html {
 
 .listing {
 	color: #444;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	/* margin: 10px; */
 	background-color: white;
 	padding: 10px;
@@ -91,7 +95,7 @@ html {
 }
 
 .listing img {
-	padding: 20px;
+	padding: 10px;
 }
 .listing:hover {
 	background-color: goldenrod;
@@ -101,7 +105,7 @@ html {
 }
 
 li div {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	margin: 10px;
 	background-color: #fff;
 	padding: 20px;
@@ -112,6 +116,6 @@ li {
 }
 .venueName {
 	font-weight: bold;
-	margin-bottom: 5px;
+	margin-bottom: 3px;
 	/* font-size: 18px; */
 }
