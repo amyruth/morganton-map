@@ -6,7 +6,7 @@ const Header = (props) => {
 	return (
 		<header>
 			<h1>
-				mmm - the morganton meal map
+				the morganton meal map (mmm)
 			</h1>
 			<a href='#main-menu' 
 			className='menu-toggle'

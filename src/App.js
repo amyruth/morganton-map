@@ -105,21 +105,20 @@ class App extends Component {
 		
 
 		window.google.maps.event.addListener(marker, 'click', () => {
-		
-			
 			
 			infoWindow.setContent(`	
 				<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
-					<p>Category: ${myVenue.venue.categories[0].shortName}</p>
-					
+					<p>Category: ${myVenue.venue.categories[0].shortName}</p>					
 				</div>
 				`);
+
 				infoWindow.open(map, marker);
 				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
 				setTimeout(marker.setAnimation(null), 1600);
+				map.panTo(marker.getPosition());
 			});	
 			
 			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
@@ -170,7 +169,6 @@ class App extends Component {
 		console.log('nav clicked');
 		document.querySelector('.sidebar').classList.toggle('open');
 	}
-	
 	render() { 
     return (
       <div className='App'>
