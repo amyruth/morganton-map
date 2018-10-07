@@ -29,7 +29,7 @@
 	
 }
 #map {
-	height: 800px;
+	height: calc(100vh - 101px);
 	width: 100%;
 }
 
