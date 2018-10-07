@@ -34,7 +34,7 @@ label {
 	height: calce(100% - 99px);
 	background-color: rgb(95, 90, 117);
 	/* overflow-x: hidden; */
-	overflow-y: auto;
+	overflow-y: scroll;
 	padding-top: 20px;
 	transition: 0.5s;
 	position: fixed;
