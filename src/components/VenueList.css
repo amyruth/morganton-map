@@ -1,5 +1,8 @@
 .venues {
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 	padding: 10px;
-	height: 700px;
+	height:calc(100vh - 94px);
+	/* border: 1px solid blanchedalmond; */
+
+	
 }

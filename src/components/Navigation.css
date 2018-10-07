@@ -30,11 +30,11 @@ label {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 325px;
+	width: 320px;
 	height: calce(100% - 99px);
 	background-color: rgb(95, 90, 117);
 	/* overflow-x: hidden; */
-	overflow-y: scroll;
+	overflow-y: auto;
 	padding-top: 20px;
 	transition: 0.5s;
 	position: fixed;
