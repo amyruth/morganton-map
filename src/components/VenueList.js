@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
-
+import './VenueList.css';
 const VenueList = props => {
 	return (
 		<ul className='venues'>
