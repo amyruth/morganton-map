@@ -3,6 +3,7 @@
 	flex-direction: column;
 	padding: 10px;
 	text-align: center;
+
 }
 
 label {
@@ -29,10 +30,16 @@ label {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 40%;
-	height: 100%;
+	width: 325px;
+	height: calce(100% - 99px);
 	background-color: rgb(95, 90, 117);
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
+	overflow-y: scroll;
 	padding-top: 20px;
+	transition: 0.5s;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
 	transition: 0.5s;
 }
