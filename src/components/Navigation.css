@@ -36,10 +36,15 @@ label {
 	/* overflow-x: hidden; */
 	overflow-y: scroll;
 	padding-top: 20px;
-	transition: 0.5s;
 	position: fixed;
 	z-index: 1;
 	top: 0;
 	left: 0;
-	transition: 0.5s;
+	/* transition: 0.5s; */
+	transform: translate(-325px);
+	transition: transform 0.5s ease;
+}
+
+.open {
+	transform: translate(0);
 }

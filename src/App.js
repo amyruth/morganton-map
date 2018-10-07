@@ -166,10 +166,14 @@ class App extends Component {
 		this.getPlaces();
 	}
 
+	openMenu = () => {
+		console.log('nav clicked');
+		document.querySelector('.sidebar').classList.toggle('open');
+	}
 	render() { 
     return (
       <div className='App'>
-		<Header />
+		<Header openMenu={this.openMenu} />
 	
 		<div className='main'>
 			<Navigation 
