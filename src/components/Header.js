@@ -3,6 +3,9 @@ import './Header.css';
 const Header = () => {
 	return (
 		<header>
+			<h1>
+				mmm - the morganton meal map
+			</h1>
 			<a href='#main-menu' 
 			className='menu-toggle'
 			role='button'
@@ -18,9 +21,6 @@ const Header = () => {
 				</div>
 			</a>
 		
-			<h1>
-				mmm - the morganton meal map
-			</h1>
 
 		
 		</header>
