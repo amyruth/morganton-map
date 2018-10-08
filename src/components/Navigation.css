@@ -20,20 +20,19 @@ label {
 	align-self: center;
 }
 
-
-
 .sidebar {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 275px;
-	/* height: calce(100vh - 99px); */
-	background-color: rgb(178, 163, 241);
+	/* height: calc(100vh - 100px); */
+	background-color: #FF4186;
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
-	top: 0;
+	top: 83px;
+	/* bottom: 50%; */
 	left: 0;
 	transform: translateX(-100%);
 	transition: transform 0.5s ease;
