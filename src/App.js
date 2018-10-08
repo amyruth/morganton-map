@@ -111,7 +111,8 @@ class App extends Component {
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
-					<p>Category: ${myVenue.venue.categories[0].shortName}</p>					
+					<p>Category: ${myVenue.venue.categories[0].shortName}</p>			
+					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>	
 				</div>
 				`);
 
