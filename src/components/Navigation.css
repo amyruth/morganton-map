@@ -28,7 +28,7 @@ label {
 	justify-content: center;
 	align-items: center;
 	width: 275px;
-	height: calce(100vh - 99px);
+	/* height: calce(100vh - 99px); */
 	background-color: rgb(178, 163, 241);
 	overflow-y: scroll;
 	position: fixed;
