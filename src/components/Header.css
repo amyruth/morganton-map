@@ -1,5 +1,5 @@
 header {
-	background-color: #FFE4B5;
+	background-color: #002a15;
 	padding: 20px;
 	height: 45px;
 	width: 100%;
@@ -8,13 +8,13 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	/* border: 1px solid firebrick; */
-	color: #444;
+	color: mintcream;
 }
 
 .hamburger-icon {
 	width: 35px;
 	height: 5px;
-	background-color: #444;
+	background-color: mintcream;
 	margin: 6px 0;
 }
 
