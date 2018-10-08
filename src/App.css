@@ -74,9 +74,6 @@ html {
 	margin: 15px 0;
 }
 
-.listing img {
-	padding: 10px;
-}
 .listing:hover {
 	background-color: goldenrod;
 }
@@ -92,8 +89,15 @@ li div {
 
 li {
 	list-style-type: none;
+	border-radius: 10px;
 }
 .venueName {
 	font-weight: bold;
 	margin-bottom: 3px;
+}
+
+.venueImage {
+	/* box-shadow: 3px 3px 3px  rgb(206, 205, 205); */
+	border-radius: 15px 15px 15px;
+	padding: 10px;
 }
