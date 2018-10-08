@@ -1,13 +1,14 @@
 import React from 'react';
 import './Header.css';
 
-
 const Header = (props) => {
 	return (
 		<header>
 			<h1>
-				the morganton meal map (mmm)
+				the morganton meal map
 			</h1>
+			{/* <span className='subtitle'>(aka "mmm")</span> */}
+				
 			<a href='#main-menu' 
 			className='menu-toggle'
 			role='button'

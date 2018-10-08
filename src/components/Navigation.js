@@ -11,13 +11,15 @@ class Navigation extends Component {
 				
 
 				<div className='search-section'>
-					<label htmlFor='searchbar'>Search</label>
+					
 						<input type='text' id='searchbar'
 							placeholder='Search places by name' 
 							value={this.props.searchQuery}
 							onChange={(e) => this.props.setQuery(e.target.value)} 
 						/>
                 </div>
+
+				<a className="attribution" href='https://foursquare.com/' target='blank'>Powered by Foursquare</a>
 
 				<VenueList myVenues={this.props.myVenues}
 					listClickHandler={this.props.listClickHandler} 

@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
-
+import './responsive.css';
 
 class App extends Component {
 	state = {
