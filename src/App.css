@@ -45,6 +45,7 @@ html {
 	margin-top: 10px;
 	font-size: 1rem;
 	align-self: center;
+	border-radius: 5px;
 }
 
 .infoWin {
@@ -75,7 +76,7 @@ html {
 }
 
 .listing:hover {
-	background-color: goldenrod;
+	background-color: rgb(186, 195, 204);
 }
 .hidden {
 	display: none;

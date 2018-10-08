@@ -11,7 +11,7 @@ class Navigation extends Component {
 				
 
 				<div className='search-section'>
-					{/* <label htmlFor='searchbar'>Search</label> */}
+					<label htmlFor='searchbar'>Search</label>
 						<input type='text' id='searchbar'
 							placeholder='Search places by name' 
 							value={this.props.searchQuery}
