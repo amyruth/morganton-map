@@ -41,9 +41,10 @@
 		font-size: 26px;
 	}
 }
+
 @media  screen and (min-width: 1250px) {
-	body {
+	/* body {
 		width: 1250px;
 		margin: 0 auto;
-	}
+	} */
 }

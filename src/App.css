@@ -64,7 +64,6 @@ html {
 }
 
 .listing {
-	color: #444;
 	background-color: white;
 	padding: 10px;
 	font-size: 16px;
@@ -73,10 +72,11 @@ html {
 	text-align: center;
 	width: 200px;
 	margin: 15px 0;
+	cursor: pointer;
 }
 
 .listing:hover {
-	background-color: rgb(186, 195, 204);
+	background-color: rgb(135, 175, 214);
 }
 .hidden {
 	display: none;
