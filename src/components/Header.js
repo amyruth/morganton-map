@@ -12,7 +12,7 @@ const Header = (props) => {
 			className='menu-toggle'
 			role='button'
 			id='main-menu-toggle'
-			aria-explanded='false'
+			aria-expanded='false'
 			aria-controls='main-menu'
 			aria-label='Open main menu'
 			>
