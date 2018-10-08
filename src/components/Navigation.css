@@ -29,7 +29,7 @@ label {
 	align-items: center;
 	width: 275px;
 	height: calce(100vh - 99px);
-	background-color: rgb(95, 90, 117);
+	background-color: rgb(178, 163, 241);
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
@@ -48,4 +48,10 @@ label {
 	text-decoration: none;
 	align-self: flex-end;
 	margin-right: 10px;
+}
+
+.attribution {
+	text-decoration: none;
+	font-weight: bold;
+	margin-top: 2px;
 }
