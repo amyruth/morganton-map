@@ -11,7 +11,7 @@ const ListItem = props => props.myVenues.map( myVenue =>{
 			>				<p className='venueName'>{myVenue.venue.name}</p>
 				
 				{/* <p>Category: {myVenue.venue.categories[0].shortName}</p>	 */}
-				<img src={"https://maps.googleapis.com/maps/api/streetview?size=125x125&location=" + myVenue.venue.location.lat + "," + myVenue.venue.location.lng + "&key=***REMOVED***"} alt={myVenue.venue.name} />
+				<img src={"https://maps.googleapis.com/maps/api/streetview?size=125x125&location=" + myVenue.venue.location.lat + "," + myVenue.venue.location.lng + "&key=***REMOVED***"} className='venueImage' alt={myVenue.venue.name} />
 			</li>
 		)
 		
