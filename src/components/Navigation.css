@@ -13,7 +13,7 @@ label {
 }
 
 #searchbar {
-	height: 2rem;
+	height: 1.5rem;
 	width: 100%;
 	padding: 2px;
 	font-size: 1rem;
@@ -28,11 +28,11 @@ label {
 	width: 275px;
 	/* height: calc(100vh - 100px); */
 	background-color: #002a15;
-	border: 1px solid #444;
+	/* border-right: 50px solid #444; */
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
-	top: 0;
+	top: 80px;
 	left: 0;
 	transform: translateX(-100%);
 	transition: transform 0.5s ease;
@@ -42,12 +42,22 @@ label {
 	transform: translate(0);
 }
 
-.close-menu {
+.close-btn {
+	color: #f5fffa;
+	font-weight: bold;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.close-btn:hover {
+	color: #D99800;
+}
+/* .close-menu {
 	font-size: 3rem;
 	text-decoration: none;
 	align-self: flex-end;
 	margin-right: 10px;
-}
+} */
 
 .attribution:link {
 	text-decoration: none;

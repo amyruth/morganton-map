@@ -11,16 +11,17 @@ header {
 	color: #f5fffa;
 }
 
-.hamburger-icon {
+/* .hamburger-icon {
 	width: 35px;
 	height: 5px;
 	background-color: #f5fffa;
 	margin: 6px 0;
 	transition: 0.4s;
-}
+} */
 
 #nav-icon {
-	font-size: 20px;
+	font-size: 22px;
+	letter-spacing: 1px;
     cursor: pointer;
 	margin-right: 20px;
     color: #f5fffa;
@@ -29,22 +30,9 @@ header {
 	border-radius: 50%;
 }
 
+
 #nav-icon:hover {
 	background-color: #A31F1F;
-}
-
-.change .bar1 {
-	-webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-    transform: rotate(-45deg) translate(-9px, 6px) ;
-}
-
-.change .bar2 {
-	opacity: 0;
-}
-
-.change .bar3 {
-	-webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-    transform: rotate(45deg) translate(-8px, -8px) ;
 }
 
 h1{

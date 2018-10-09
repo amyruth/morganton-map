@@ -21,9 +21,10 @@ const Header = (props) => {
 					onClick={props.openMenu} 
 					onKeyPress={props.openMenu}
 				>
-					<div className='hamburger-icon bar1'></div>
+					Menu
+					{/* <div className='hamburger-icon bar1'></div>
 					<div className='hamburger-icon bar2'></div>
-					<div className='hamburger-icon bar3'></div>
+					<div className='hamburger-icon bar3'></div> */}
 				</div>
 			{/* </a> */}
 		
