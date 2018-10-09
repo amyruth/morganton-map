@@ -8,28 +8,43 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	/* border: 1px solid firebrick; */
-	color: mintcream;
+	color: #f5fffa;
 }
 
 .hamburger-icon {
 	width: 35px;
 	height: 5px;
-	background-color: mintcream;
+	background-color: #f5fffa;
 	margin: 6px 0;
+	transition: 0.4s;
 }
 
 #nav-icon {
 	font-size: 20px;
     cursor: pointer;
 	margin-right: 20px;
-    color: white;
+    color: #f5fffa;
     padding: 10px 15px;
 	border: none;
 	border-radius: 50%;
 }
 
 #nav-icon:hover {
-	background-color: firebrick;
+	background-color: #A31F1F;
+}
+
+.change .bar1 {
+	-webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+    transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+.change .bar2 {
+	opacity: 0;
+}
+
+.change .bar3 {
+	-webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
 }
 
 h1{

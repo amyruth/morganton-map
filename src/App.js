@@ -26,7 +26,21 @@ class App extends Component {
 			}
 		})
 	}
+
+	openMenu = () => {
+		console.log('nav clicked');
+		document.querySelector('.sidebar').classList.toggle('open');
+	}
 	
+	onListKeypress = () => {
+		this.listClickHandler();
+	}
+
+	menuButtonFocus = (e) => {
+		if(e.keyCode === 13) {
+			console.log('menu button entered');
+		}
+	}
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		// console.log(e);
@@ -166,17 +180,16 @@ class App extends Component {
 		this.getPlaces();
 	}
 
-	openMenu = () => {
-		console.log('nav clicked');
-		document.querySelector('.sidebar').classList.toggle('open');
-	}
+
+	
 	render() { 
     return (
       <div className='App'>
-		<Header openMenu={this.openMenu} />
+		<Header openMenu={this.openMenu} menuButtonFocus={this.menuButtonFocus}/>
 	
-		<div className='main'>
-			<Navigation 
+		<div className='main' role='main'>
+			<Navigation
+				onListKeypress={this.onListKeypress} 
 				listClickHandler={this.listClickHandler}
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
@@ -186,7 +199,7 @@ class App extends Component {
 				filterResults={this.filterResults}
 				listItems={this.state.listItems}
 			/>
-			<div id='map'></div>
+			<div id='map' role='application' aria-label='Neighborhood Map'></div>
 		</div>
       </div>
     );
