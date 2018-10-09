@@ -8,7 +8,12 @@ class Navigation extends Component {
 		return (
 			<nav className='sidebar' id='main-menu' aria-label='Main Navigation' aria-expanded='false'>
 				{/* <a href='#' className='close-menu'>&times;</a> */}
-				
+				<div role='button' 
+					className='close-btn'
+					onClick={this.props.openMenu}
+				>
+					Close Menu
+				</div>
 
 				<div className='search-section'>
 					

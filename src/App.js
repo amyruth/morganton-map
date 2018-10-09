@@ -185,6 +185,7 @@ class App extends Component {
 	
 		<div className='main' role='main'>
 			<Navigation
+				openMenu={this.openMenu}
 				onListKeypress={this.onListKeypress} 
 				listClickHandler={this.listClickHandler}
 				myVenues={this.state.myVenues}
