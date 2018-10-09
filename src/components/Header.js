@@ -9,21 +9,23 @@ const Header = (props) => {
 			</h1>
 			{/* <span className='subtitle'>(aka "mmm")</span> */}
 				
-			<a href='#main-menu' 
-			// className='menu-toggle'
-			role='button'
-			// id='main-menu-toggle'
-			aria-expanded='false'
-			aria-controls='main-menu'
-			aria-label='Open and close main menu'
+			{/* <a href='#main-menu'> */}
 			
-			>
-				<div id='nav-icon' aria-hidden='true' onClick={props.openMenu} onKeyDown={(e) => props.menuButtonFocus(e)}>
+			
+		
+				<div id='nav-icon' role='button'
+					aria-pressed='false'
+					aria-expanded='false'
+					aria-controls='main-menu'
+					aria-label='Open and close main menu' 
+					onClick={props.openMenu} 
+					onKeyPress={props.openMenu}
+				>
 					<div className='hamburger-icon bar1'></div>
 					<div className='hamburger-icon bar2'></div>
 					<div className='hamburger-icon bar3'></div>
 				</div>
-			</a>
+			{/* </a> */}
 		
 
 		
