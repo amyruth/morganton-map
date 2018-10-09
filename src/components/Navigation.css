@@ -9,7 +9,7 @@
 label {
 	font-weight: bold;
 	font-size: 1.3rem;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #searchbar {
@@ -27,13 +27,12 @@ label {
 	align-items: center;
 	width: 275px;
 	/* height: calc(100vh - 100px); */
-	background-color: mintcream;
+	background-color: #002a15;
 	border: 1px solid #444;
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
-	top: 82px;
-	/* bottom: 50%; */
+	top: 0;
 	left: 0;
 	transform: translateX(-100%);
 	transition: transform 0.5s ease;
@@ -50,8 +49,24 @@ label {
 	margin-right: 10px;
 }
 
-.attribution {
+.attribution:link {
 	text-decoration: none;
 	font-weight: bold;
+	letter-spacing: 1px;
 	margin-top: 2px;
+	padding: 2px 1px 0;
+	color: #f5fffa;
+}
+
+.attribution:hover {
+	border-bottom: 2px solid #009048;
+	color: #009048;
+}
+
+.attribution:visited {
+	color: #D99800;
+}
+.attribution:focus {
+	outline: 1px solid #f5fffa;
+	padding: 4px;
 }
