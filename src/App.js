@@ -32,15 +32,12 @@ class App extends Component {
 		document.querySelector('.sidebar').classList.toggle('open');
 	}
 	
-	onListKeypress = () => {
-		this.listClickHandler();
-	}
-
-	menuButtonFocus = (e) => {
-		if(e.keyCode === 13) {
-			console.log('menu button entered');
+	menuKeyPress = (e) => {
+		console.log('pressed');
 		}
-	}
+	
+
+	
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		// console.log(e);
@@ -180,12 +177,11 @@ class App extends Component {
 		this.getPlaces();
 	}
 
-
-	
 	render() { 
     return (
       <div className='App'>
-		<Header openMenu={this.openMenu} menuButtonFocus={this.menuButtonFocus}/>
+		<Header openMenu={this.openMenu}
+		menuKeyPress={this.menuKeyPress} />
 	
 		<div className='main' role='main'>
 			<Navigation

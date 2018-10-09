@@ -9,7 +9,7 @@ const ListItem = props => props.myVenues.map( myVenue =>{
 				onClick={ () => props.listClickHandler(myVenue)}
 				onKeyPress={() => props.listClickHandler(myVenue)}
 				tabIndex='0'
-				role='button'
+				role='menuitem'
 			>	
 				<p className='venueName'>
 					{myVenue.venue.name}		
