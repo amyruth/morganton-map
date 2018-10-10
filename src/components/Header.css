@@ -7,17 +7,8 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	/* border: 1px solid firebrick; */
 	color: #f5fffa;
 }
-
-/* .hamburger-icon {
-	width: 35px;
-	height: 5px;
-	background-color: #f5fffa;
-	margin: 6px 0;
-	transition: 0.4s;
-} */
 
 #nav-icon {
 	font-size: 22px;
@@ -28,15 +19,20 @@ header {
     padding: 10px 15px;
 	border: none;
 	border-radius: 50%;
+	text-decoration: none;
 }
 
 
 #nav-icon:hover {
-	background-color: #A31F1F;
+	color: #D99800;
+}
+
+#nav-icon:focus {
+	outline: 2px solid #D99800;
 }
 
 h1{
-	/* margin-right: 100px;	 */
+	margin-right: 100px;	
 	letter-spacing: 1px;
 }
 

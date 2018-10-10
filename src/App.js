@@ -30,11 +30,12 @@ class App extends Component {
 	openMenu = () => {
 		console.log('nav clicked');
 		document.querySelector('.sidebar').classList.toggle('open');
+		
 	}
 	
-	menuKeyPress = (e) => {
-		console.log('pressed');
-		}
+	// menuKeyPress = (e) => {
+	// 	console.log('pressed');
+	// 	}
 	
 
 	

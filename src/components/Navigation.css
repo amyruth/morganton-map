@@ -3,7 +3,6 @@
 	flex-direction: column;
 	padding: 5px;
 	text-align: center;
-
 }
 
 label {
@@ -47,17 +46,18 @@ label {
 	font-weight: bold;
 	letter-spacing: 1px;
 	cursor: pointer;
+	text-decoration: none;
+	margin-top: 10px;
 }
 
 .close-btn:hover {
 	color: #D99800;
 }
-/* .close-menu {
-	font-size: 3rem;
-	text-decoration: none;
-	align-self: flex-end;
-	margin-right: 10px;
-} */
+
+.close-btn:focus {
+	outline: 1px solid #D99800;
+	padding: 1px;
+}
 
 .attribution:link {
 	text-decoration: none;
@@ -69,7 +69,7 @@ label {
 }
 
 .attribution:hover {
-	border-bottom: 2px solid #009048;
+	border-bottom: 2px solid #99	ddbb;
 	color: #009048;
 }
 
@@ -77,6 +77,6 @@ label {
 	color: #D99800;
 }
 .attribution:focus {
-	outline: 1px solid #f5fffa;
+	outline: 2px solid #D99800;
 	padding: 4px;
 }
