@@ -104,7 +104,7 @@ class App extends Component {
 	}	  
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***S&callback=initMap');
 			window.initMap = this.initMap;
 	}	
 
