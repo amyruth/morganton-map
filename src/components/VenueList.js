@@ -4,9 +4,9 @@ import ListItem from './ListItem';
 import './VenueList.css';
 const VenueList = props => {
 	return (
-		<ul className='venues' role='menu'>
+		<ul className='venues' role='menu' aria-labelledby='nav-icon'>
 			<ListItem myVenues={props.myVenues}
-				onListKeypress={props.onListKeypress}
+				listKbHandler={props.listKbHandler}
 				listClickHandler={props.listClickHandler} 
 			/>
 		</ul>

@@ -6,16 +6,16 @@ class Navigation extends Component {
 
 	render() {
 		return (
-			<nav className='sidebar' id='main-menu' aria-label='Main Navigation' aria-expanded='false'>
+			<nav className='sidebar' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
 				{/* <a href='#' className='close-menu'>&times;</a> */}
-				<a href="#main-menu" role='button'
+				{/* <a href="#main-menu" role='button'
 					aria-pressed='false'
 					aria-expanded='false' 
 					className='close-btn'
 					onClick={this.props.openMenu}
 				>
 					Close Menu
-				</a>
+				</a> */}
 
 				<div className='search-section'>
 					
@@ -31,7 +31,7 @@ class Navigation extends Component {
 				<a className="attribution" href='https://foursquare.com/' target='blank'>Powered by Foursquare</a>
 
 				<VenueList myVenues={this.props.myVenues}
-					onListKeypress={this.props.onListKeypress} 
+					listKbHandler={this.props.listKbHandler}
 					listClickHandler={this.props.listClickHandler} 
 				/>
 			</nav>

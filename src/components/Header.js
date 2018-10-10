@@ -4,16 +4,15 @@ import './Header.css';
 const Header = (props) => {
 	return (
 		<header role='banner'>
-			<a href='#main-menu'	 id='nav-icon' role='button'
-				aria-pressed='false'
-				aria-expanded='false'
+			<button id='nav-icon'
+				aria-haspopup='true'
 				aria-controls='main-menu'
 				aria-label='Open and close main menu' 
 				onClick={props.openMenu} 
-				onKeyPress={props.openMenu}
-				>
+				onKeyDown={(e) => props.openMenuKey(e)}
+			>
 				menu
-			</a>
+			</button>
 			
 			<h1>
 				the morganton meal map
