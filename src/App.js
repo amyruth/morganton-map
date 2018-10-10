@@ -27,16 +27,37 @@ class App extends Component {
 		})
 	}
 
-	openMenu = () => {
-		console.log('nav clicked');
-		document.querySelector('.sidebar').classList.toggle('open');
-		
+	listKbHandler = (e, item) => {
+		if(e.type === 'keydown') {
+			if(e.keyCode === 13 || e.keyCode === 32) {
+				this.listClickHandler(item);
+			}
+		}
 	}
 	
-	// menuKeyPress = (e) => {
-	// 	console.log('pressed');
-	// 	}
+	openMenu = () => {
+		let sidebar = document.querySelector('.sidebar');
+		let search = document.getElementById('searchbar');
+		console.log('nav clicked');
+		sidebar.classList.toggle('open');
+
+		sidebar.getAttribute('aria-hidden') === 'true' ?
+		sidebar.setAttribute('aria-hidden', 'false') :
+		sidebar.setAttribute('aria-hidden', 'true');
+
+		sidebar.getAttribute('aria-expanded') === 'false' ?
+		sidebar.setAttribute('aria-expanded', 'true') :
+		sidebar.setAttribute('aria-expanded', 'false');
+		search.focus();
+	}
 	
+	openMenuKey = (e) => {
+		if(e.type === 'keydown') {
+			if(e.keyCode === 13 || e.keyCode === 32) {
+				this.openMenu();
+			}
+		}
+	}
 
 	
 	setQuery = (e) => {
@@ -182,12 +203,13 @@ class App extends Component {
     return (
       <div className='App'>
 		<Header openMenu={this.openMenu}
-		menuKeyPress={this.menuKeyPress} />
+		menuKeyPress={this.menuKeyPress}
+		openMenuKey={this.openMenuKey} />
 	
 		<div className='main' role='main'>
 			<Navigation
 				openMenu={this.openMenu}
-				onListKeypress={this.onListKeypress} 
+				listKbHandler={this.listKbHandler}
 				listClickHandler={this.listClickHandler}
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
