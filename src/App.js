@@ -38,7 +38,7 @@ class App extends Component {
 	openMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
 		let search = document.getElementById('searchbar');
-		console.log('nav clicked');
+		console.log('open/close event');
 		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
 		
@@ -49,16 +49,16 @@ class App extends Component {
 		sidebar.getAttribute('aria-expanded') === 'false' ?
 		sidebar.setAttribute('aria-expanded', 'true') :
 		sidebar.setAttribute('aria-expanded', 'false');
-		search.focus();
+		// search.focus();
 	}
 	
-	openMenuKey = (e) => {
-		if(e.type === 'keydown') {
-			if(e.keyCode === 13 || e.keyCode === 32) {
-				this.openMenu();
-			}
-		}
-	}
+	// openMenuKey = (e) => {
+	// 	if(e.type === 'keydown') {
+	// 		if(e.keyCode === 13 || e.keyCode === 32) {
+	// 			this.openMenu();
+	// 		}
+	// 	}
+	// }
 
 	
 	setQuery = (e) => {
@@ -104,7 +104,7 @@ class App extends Component {
 	}	  
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE_API&callback=initMap');
 			window.initMap = this.initMap;
 	}	
 
@@ -175,8 +175,8 @@ class App extends Component {
 		console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '***REMOVED***',
-				client_secret: '***REMOVED***',
+				client_id: '4SQUARE',
+				client_secret: '4SQUARE',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',

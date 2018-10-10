@@ -6,7 +6,7 @@ class Navigation extends Component {
 
 	render() {
 		return (
-			<nav className='sidebar hide' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
+			<nav className='sidebar' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
 				{/* <a href='#' className='close-menu'>&times;</a> */}
 				{/* <a href="#main-menu" role='button'
 					aria-pressed='false'
