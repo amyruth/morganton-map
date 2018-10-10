@@ -3,8 +3,7 @@ import './App.css';
 import axios from 'axios';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-
+import './responsive.css';
 
 class App extends Component {
 	state = {
@@ -13,54 +12,102 @@ class App extends Component {
             lng:-81.68481880000002
 		},
 		myVenues: [],
-		
 		searchQuery: '',
 		markers: [],
-		listItems: [],
+		listItems: []
 	}
-
-	liClickHandler = (item) => {
+	
+	listClickHandler = (item) => {
+		console.log('item clicked');
 		console.log(item);
-	}
-	setQuery = (e) => {
-		this.setState({searchQuery: e});
-		console.log(e);
-		// this.filterMarkers(e);
-	}
-
-	filterMarkers = (searchTerm) => {
-		// grab all list items
-		// convert query and venue name .toLowerCase()
-		// compare them
-		// if not a match add hidden class to list item	
-		
+		this.state.markers.forEach(marker => {
+			if(item.venue.id === marker.key) {
+				window.google.maps.event.trigger(marker, 'click');	
+			}
+		})
 	}
 
-
-	toggleBounce = () => {
-		if(this.getAnimation() !== null){
-			this.setAnimation(null);
-		} else {
-			this.setAnimation(window.google.maps.Animation.BOUNCE);
+	listKbHandler = (e, item) => {
+		if(e.type === 'keydown') {
+			if(e.keyCode === 13 || e.keyCode === 32) {
+				this.listClickHandler(item);
+			}
 		}
 	}
+	
+	openMenu = () => {
+		let sidebar = document.querySelector('.sidebar');
+		let search = document.getElementById('searchbar');
+		console.log('open/close event');
+		sidebar.classList.toggle('hide');
+		sidebar.classList.toggle('open');
+		
+		sidebar.getAttribute('aria-hidden') === 'true' ?
+		sidebar.setAttribute('aria-hidden', 'false') :
+		sidebar.setAttribute('aria-hidden', 'true');
+
+		sidebar.getAttribute('aria-expanded') === 'false' ?
+		sidebar.setAttribute('aria-expanded', 'true') :
+		sidebar.setAttribute('aria-expanded', 'false');
+		// search.focus();
+	}
+	
+	// openMenuKey = (e) => {
+	// 	if(e.type === 'keydown') {
+	// 		if(e.keyCode === 13 || e.keyCode === 32) {
+	// 			this.openMenu();
+	// 		}
+	// 	}
+	// }
+
+	
+	setQuery = (e) => {
+		this.setState({searchQuery: e});
+		// console.log(e);
+		this.filterResults(e);
+	}
+
+	filterResults = (query) => {
+		let listings = document.querySelectorAll('.listing');
+		let venues = this.state.myVenues.map(myVenue => myVenue);
+		let copyMarkers = this.state.markers.map( marker => marker);
+		query = query.toLowerCase();
+		
+
+		console.log('venues copied', venues);
+		console.log('markers copied', copyMarkers);
+		if(query === '') {
+			listings.forEach( listing => {
+				listing.classList.remove('hidden');
+			})
+			copyMarkers.forEach(marker => marker.setVisible(true));
+			// console.table(copyMarkers);
+		}
+
+		if(query) {
+			query = query.toLowerCase();
+			listings.forEach( listing => {
+				if((!listing.title.toLowerCase().includes(query)) ) {
+					listing.classList.add('hidden');	
+					console.log(listing.title);				
+				} else{
+					listing.classList.remove('hidden');
+				}
+			})
+			
+			copyMarkers.forEach(marker => marker.title.toLowerCase().includes(query) ? 
+				marker.setVisible(true) : marker.setVisible(false)	
+			)
+		}
+		this.setState({markers: copyMarkers});
+		console.table(this.state.markers);
+	}	  
 
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS&callback=initMap');
 			window.initMap = this.initMap;
-	}
+	}	
 
-	makeMarkerIcon = (markerColor) =>  {
-        var markerImage = new window.google.maps.MarkerImage(
-          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-          '|40|_|%E2%80%A2',
-          new window.google.maps.Size(21, 34),
-          new window.google.maps.Point(0, 0),
-          new window.google.maps.Point(10, 34),
-          new window.google.maps.Size(21,34));
-        return markerImage;
-	}
-	  
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
 			center: this.state.initialCenter,
@@ -70,15 +117,12 @@ class App extends Component {
 		console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
-		//create markers
-		
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
-		let defaultIcon = this.makeMarkerIcon('0091ff');
-		let highlightedIcon = this.makeMarkerIcon('FFFF24');
-		let copyVenues = this.state.myVenues.map(venue => venue);
-
-		copyVenues.forEach(function(myVenue) {
+		let copyOfVenues = this.state.myVenues.map(venue => venue);
+		
+		//create markers
+		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
 				position: {
 					lat: myVenue.venue.location.lat,
@@ -88,44 +132,70 @@ class App extends Component {
 				animation: window.google.maps.Animation.DROP,
 				title: myVenue.venue.name,
 				key: myVenue.venue.id,
-				icon: defaultIcon
+				isSelected: false
 			})
 			
 			bounds.extend(marker.position);
-			//populates InfoWindow with location info
-		window.google.maps.event.addListener(marker, 'click', function() {
-			
-				infoWindow.setContent(`	
-					<div class='infoWin'>
-						<p class='infoTitle'>${myVenue.venue.name}</p>
-						<p>${myVenue.venue.location.formattedAddress[0]}</p>
-						<p>${myVenue.venue.location.formattedAddress[1]}</p>
-						<p>Type: ${myVenue.venue.categories[0].shortName}</p>
-					</div>
-				`);
-				infoWindow.open(map, marker);
-				
-		});	
-
-		//bounce marker on hover
-		window.google.maps.event.addListener(marker, 'mouseover', function() {
-			marker.setAnimation(window.google.maps.Animation.BOUNCE)
-		})
-
-		window.google.maps.event.addListener(marker, 'mouseout', function() {
-			marker.setAnimation(null)
-		})
 		
+
+		window.google.maps.event.addListener(marker, 'click', () => {
+			
+			infoWindow.setContent(`	
+				<div class='infoWin'>
+					<p class='infoTitle'>${myVenue.venue.name}</p>
+					<p>${myVenue.venue.location.formattedAddress[0]}</p>
+					<p>${myVenue.venue.location.formattedAddress[1]}</p>
+					<p>Category: ${myVenue.venue.categories[0].shortName}</p>			
+					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>	
+				</div>
+				`);
+
+				infoWindow.open(map, marker);
+				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
+				setTimeout(marker.setAnimation(null), 1600);
+				map.panTo(marker.getPosition());
+			});	
+			
+			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
+			window.google.maps.event.addListener(marker, 'visible_changed', () => {
+				infoWindow.close();
+			})
+			
 			myVenue.marker = marker;
 			markers.push(marker);
 		})
-		
-		this.setState({myVenues: copyVenues});
 		this.setState({ markers: markers });
-}
-
+		this.setState({myVenues: copyOfVenues});
+		
+		console.log('updated markers');
+	}
 	
-
+	getPlaces = () => {
+		const endpoint = 'https://api.foursquare.com/v2/venues/explore';
+		console.log('grabbing locations');
+		axios.get(endpoint, {
+			params: {
+				client_id: 'HLAAAV43L3SOYXNORDN3HSWFR3ZDVSX4PT4HOQKJBW2PQF00',
+				client_secret: 'T2GVYKXUO3HRINYCYFPMYAILORVV4T3LOOWY2N4O5QLERGBC',
+				v: 20180922,
+				ll: '35.7454,-81.6848',
+				section: 'food',
+				near: 'Morganton'
+			}			
+		})
+		.then((res) => {
+			console.log("Response from server: " + res.status);
+			console.log('locations retrieved');
+			// console.log(res.data.response.groups[0].items);
+			this.setState({myVenues: res.data.response.groups[0].items});
+			// console.log(this.state.myVenues);
+		})
+		.then( () => {
+			this.loadMap();
+		})
+		.catch(error => console.log("Error " + error));
+	}
+	
 	componentDidMount() {
 		this.getPlaces();
 	}
@@ -163,22 +233,25 @@ getPlaces = () => {
 	 
     return (
       <div className='App'>
-		<Header />
+		<Header openMenu={this.openMenu}
+		menuKeyPress={this.menuKeyPress}
+		openMenuKey={this.openMenuKey} />
 	
-		<div className='main'>
-			<Navigation 
-				liClickHandler={this.liClickHandler}
+		<div className='main' role='main'>
+			<Navigation
+				openMenu={this.openMenu}
+				listKbHandler={this.listKbHandler}
+				listClickHandler={this.listClickHandler}
 				myVenues={this.state.myVenues}
 				markers={this.state.markers}
 				searchQuery={this.state.searchQuery}
 				setQuery={this.setQuery}
 				value={this.state.searchQuery}
-				filterMarkers={this.filterMarkers}
+				filterResults={this.filterResults}
 				listItems={this.state.listItems}
 			/>
-		<div id='map'></div>
+			<div id='map' role='application' aria-label='Neighborhood Map'></div>
 		</div>
-
       </div>
     );
   }

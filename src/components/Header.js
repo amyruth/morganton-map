@@ -1,9 +1,26 @@
 import React from 'react';
+import './Header.css';
 
-const Header = () => {
+const Header = (props) => {
 	return (
-		<header>
-			<h1>Where to eat in Morganton</h1>
+		<header role='banner'>
+			<button id='nav-icon'
+				aria-haspopup='true'
+				aria-controls='main-menu'
+				aria-label='Open and close main menu' 
+				onClick={props.openMenu} 
+				// onKeyDown={(e) => props.openMenuKey(e)}
+			>
+				menu
+			</button>
+			
+			<h1>
+				the morganton meal map
+			</h1>
+		
+		
+
+		
 		</header>
 	);
 };

@@ -1,0 +1,5 @@
+.venues {
+	padding: 10px;
+	height:calc(100vh - 190px);
+	/* bottom: 100px; */
+}

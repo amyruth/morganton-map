@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
+import VenueList from './VenueList';
+import './Navigation.css';
 
 class Navigation extends Component {
 
-
-	
 	render() {
 		return (
-			<nav className='sidebar'>
+			<nav className='sidebar hide' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
+				{/* <a href='#' className='close-menu'>&times;</a> */}
+				{/* <a href="#main-menu" role='button'
+					aria-pressed='false'
+					aria-expanded='false' 
+					className='close-btn'
+					onClick={this.props.openMenu}
+				>
+					Close Menu
+				</a> */}
+
 				<div className='search-section'>
-					<label htmlFor='searchbar'>Search Restaurants</label>
-						<input type='text' id='searchbar' 
+					
+						<input type='text' id='searchbar'
+							aria-label='Search restaurants by name'
+							role='search'
+							placeholder='Search places by name' 
 							value={this.props.searchQuery}
 							onChange={(e) => this.props.setQuery(e.target.value)} 
 						/>
-                    
-				</div>
+                </div>
 
-				<ul id='venues'>
-					{this.props.myVenues.map( myVenue => (
-						<li className='listing' key={myVenue.venue.id}
-							onClick={this.props.liClickHandler}
-						>
-							
-							<p className='venueName'>{myVenue.venue.name}</p>
-							<p>{myVenue.venue.location.formattedAddress[0]}</p>
-							<p>{myVenue.venue.location.formattedAddress[1]}</p>
-							<p>Type: {myVenue.venue.categories[0].shortName}</p>
-							
-						</li>
-					))}
-				</ul>
+				<a className="attribution" href='https://foursquare.com/' target='blank'>Powered by Foursquare</a>
+
+				<VenueList myVenues={this.props.myVenues}
+					listKbHandler={this.props.listKbHandler}
+					listClickHandler={this.props.listClickHandler} 
+				/>
 			</nav>
 		);
 	}

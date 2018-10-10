@@ -2,87 +2,112 @@
 	margin: 0;
 	padding: 0;
 }
+html, body, #root, .App, main {
+	height: 100vh;
+	width: 100%;
+}
 
 #root {
 	overflow: hidden;
 }
 .App {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 	flex-direction: column;
-	border: 2px solid black;
-
+	height: 100vh;
+	background-color: aqua;
 }
 
-header {
-	text-align: center;
-	padding: 20px;
-	
-	width: 100%;
+html {
+	background-color: black;
 }
 .main {
 	display: flex;
-	
+	height: 100%;
+	justify-content: center;
+	background-color: slategrey;
 }
 #map {
-	height: 100vh;
-	width: 80%;
-}
-
-.sidebar {
-	width:	40%;
-	height: 100vh;
-	background-color: rgb(167, 178, 187);
-	border: 1px solid black;
-	overflow-y: scroll;
+	height: calc(100vh - 80px);
+	width: 100%;
 }
 
 .search-section {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
+	text-align: center;
 }
 
 #searchbar {
-	height: 30px;
+	height: 2rem;
+	width: 225px;
 	margin-top: 10px;
+	font-size: 1rem;
+	align-self: center;
+	border-radius: 5px;
 }
+
 .infoWin {
 	text-align: center;
 	font-size: 18px;
+	font-weight: 400;
 }
+
 .infoWin p:nth-child(n+2) {
 	margin-top: 3px;
 }
+
 .infoTitle {
 	font-weight: bold;
 	font-size: 24px;
 }
 
-label {
-	font-weight: bold;
-}
-
 .listing {
-	color: green;
+	background-color: #f5fffa;
 	border: 1px solid black;
-	margin: 10px;
-	background-color: white;
 	padding: 10px;
+	font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 200px;
+	margin: 15px 0;
+	cursor: pointer;
 }
 
+.listing:focus {
+	background-color: #D99800;
+	outline-color: #D99800;
+}
+.listing:hover {
+	background-color: #00A856;
+}
 .hidden {
 	display: none;
 }
 
-li div {
-	border: 1px solid black;
+/* li div {
 	margin: 10px;
-	background-color: #fff;
+	background-color: #002a15;
 	padding: 20px;
-}
+} */
 
+li {
+	list-style-type: none;
+	border-radius: 10px;
+}
 .venueName {
 	font-weight: bold;
-	margin-bottom: 5px;
+	margin-bottom: 3px;
+	color: #002a15;
+}
+/* .venueName:hover {
+	color: mintcream;
+} */
+.venueImage {
+	/* box-shadow: 3px 3px 3px  rgb(206, 205, 205); */
+	border-radius: 15px 15px 15px;
+	padding: 10px;
+	/* background-color: #002a15; */
 }
