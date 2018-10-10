@@ -49,18 +49,8 @@ class App extends Component {
 		sidebar.getAttribute('aria-expanded') === 'false' ?
 		sidebar.setAttribute('aria-expanded', 'true') :
 		sidebar.setAttribute('aria-expanded', 'false');
-		// search.focus();
 	}
-	
-	// openMenuKey = (e) => {
-	// 	if(e.type === 'keydown') {
-	// 		if(e.keyCode === 13 || e.keyCode === 32) {
-	// 			this.openMenu();
-	// 		}
-	// 	}
-	// }
-
-	
+		
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		// console.log(e);
@@ -72,7 +62,6 @@ class App extends Component {
 		let venues = this.state.myVenues.map(myVenue => myVenue);
 		let copyMarkers = this.state.markers.map( marker => marker);
 		query = query.toLowerCase();
-		
 
 		console.log('venues copied', venues);
 		console.log('markers copied', copyMarkers);
@@ -81,7 +70,6 @@ class App extends Component {
 				listing.classList.remove('hidden');
 			})
 			copyMarkers.forEach(marker => marker.setVisible(true));
-			// console.table(copyMarkers);
 		}
 
 		if(query) {
@@ -140,15 +128,15 @@ class App extends Component {
 
 		window.google.maps.event.addListener(marker, 'click', () => {
 			
-			infoWindow.setContent(`	
-				<div class='infoWin'>
+			infoWindow.setContent(
+				`<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
 					<p>Category: ${myVenue.venue.categories[0].shortName}</p>			
 					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>	
-				</div>
-				`);
+				</div>`
+			);
 
 				infoWindow.open(map, marker);
 				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
@@ -186,16 +174,13 @@ class App extends Component {
 		.then((res) => {
 			console.log("Response from server: " + res.status);
 			console.log('locations retrieved');
-			// console.log(res.data.response.groups[0].items);
 			this.setState({myVenues: res.data.response.groups[0].items});
-			// console.log(this.state.myVenues);
 		})
 		.then( () => {
 			this.loadMap();
 		})
 		.catch(error => console.log("Error " + error));
 	}
-	
 	componentDidMount() {
 		this.getPlaces();
 	}
@@ -226,9 +211,6 @@ getPlaces = () => {
 	.catch(error => console.log("Error " + error));
 }
 
-
-
-	
   render() {
 	 
     return (

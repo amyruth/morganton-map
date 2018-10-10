@@ -25,9 +25,7 @@ label {
 	justify-content: center;
 	align-items: center;
 	width: 275px;
-	/* height: calc(100vh - 100px); */
 	background-color: #002a15;
-	/* border-right: 50px solid #444; */
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
