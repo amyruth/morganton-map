@@ -140,8 +140,7 @@ class App extends Component {
 
 				infoWindow.open(map, marker);
 				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
-				setTimeout(marker.setAnimation(null), 1600);
-				map.panTo(marker.getPosition());
+				setTimeout(marker.setAnimation(null), 3000);
 			});	
 			
 			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
