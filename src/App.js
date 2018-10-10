@@ -104,7 +104,7 @@ class App extends Component {
 	}	  
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLE_API&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}	
 
@@ -175,8 +175,8 @@ class App extends Component {
 		console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '4SQUARE',
-				client_secret: '4SQUARE',
+				client_id: '***REMOVED***',
+				client_secret: '***REMOVED***',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',

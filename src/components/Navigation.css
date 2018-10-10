@@ -41,9 +41,9 @@ label {
 	transform: translate(0);
 }
 
-/* .hide {
+.hide {
 	display: none;
-} */
+}
 
 .attribution:link {
 	text-decoration: none;
