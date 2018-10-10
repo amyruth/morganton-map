@@ -41,22 +41,8 @@ label {
 	transform: translate(0);
 }
 
-.close-btn {
-	color: #f5fffa;
-	font-weight: bold;
-	letter-spacing: 1px;
-	cursor: pointer;
-	text-decoration: none;
-	margin-top: 10px;
-}
-
-.close-btn:hover {
-	color: #D99800;
-}
-
-.close-btn:focus {
-	outline: 1px solid #D99800;
-	padding: 1px;
+.hide {
+	display: none;
 }
 
 .attribution:link {

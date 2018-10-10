@@ -20,11 +20,14 @@ header {
 	border: none;
 	border-radius: 50%;
 	text-decoration: none;
+	background-color: #002a15;
+	border: 2px solid #f5fffa;
 }
 
 
 #nav-icon:hover {
 	color: #D99800;
+	border: 2px solid #D99800;
 }
 
 #nav-icon:focus {

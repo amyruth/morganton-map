@@ -39,8 +39,9 @@ class App extends Component {
 		let sidebar = document.querySelector('.sidebar');
 		let search = document.getElementById('searchbar');
 		console.log('nav clicked');
+		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
-
+		
 		sidebar.getAttribute('aria-hidden') === 'true' ?
 		sidebar.setAttribute('aria-hidden', 'false') :
 		sidebar.setAttribute('aria-hidden', 'true');
