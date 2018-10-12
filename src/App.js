@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Map from './components/Map';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
 import './responsive.css';
@@ -229,7 +230,7 @@ getPlaces = () => {
 				value={this.state.searchQuery}
 				filterResults={this.filterResults}
 			/>
-			<div id='map' role='application' aria-label='Neighborhood Map'></div>
+			<Map />
 		</div>
       </div>
     );
