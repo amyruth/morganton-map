@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
 import './responsive.css';
 
-class App extends Component {
+export default class App extends Component {
 	state = {
 		initialCenter: {
             lat: 35.7454071,
@@ -37,7 +38,6 @@ class App extends Component {
 	
 	openMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
-		let search = document.getElementById('searchbar');
 		console.log('open/close event');
 		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
@@ -246,5 +246,3 @@ function loadScript(url) {
 	script.defer = true;
 	index.parentNode.insertBefore(script, index)
 }
-
-export default App;
