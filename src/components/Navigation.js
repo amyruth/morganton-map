@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import VenueList from './VenueList';
 import './Navigation.css';
 
-class Navigation extends Component {
+export default class Navigation extends Component {
 
 	render() {
 		return (
@@ -38,5 +38,3 @@ class Navigation extends Component {
 		);
 	}
 }
-
-export default Navigation;
