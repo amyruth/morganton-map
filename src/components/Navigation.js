@@ -8,15 +8,6 @@ export default class Navigation extends Component {
 	render() {
 		return (
 			<nav className='sidebar hide' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
-				{/* <a href='#' className='close-menu'>&times;</a> */}
-				{/* <a href="#main-menu" role='button'
-					aria-pressed='false'
-					aria-expanded='false' 
-					className='close-btn'
-					onClick={this.props.openMenu}
-				>
-					Close Menu
-				</a> */}
 
 				<div className='search-section'>
 					

@@ -9,7 +9,6 @@ const Header = (props) => {
 				aria-controls='main-menu'
 				aria-label='Open and close main menu' 
 				onClick={props.openMenu} 
-				// onKeyDown={(e) => props.openMenuKey(e)}
 			>
 				menu
 			</button>
