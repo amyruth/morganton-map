@@ -14,8 +14,7 @@ export default class App extends Component {
 		},
 		myVenues: [],
 		searchQuery: '',
-		markers: [],
-		listItems: []
+		markers: []
 	}
 	
 	listClickHandler = (item) => {
@@ -229,13 +228,19 @@ getPlaces = () => {
 				setQuery={this.setQuery}
 				value={this.state.searchQuery}
 				filterResults={this.filterResults}
-				listItems={this.state.listItems}
 			/>
 			<div id='map' role='application' aria-label='Neighborhood Map'></div>
 		</div>
       </div>
     );
   }
+}
+
+
+App.propTypes = {
+	myVenues: PropTypes.arrayOf(PropTypes.object).isRequired,
+	markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+	searchQuery: PropTypes.string
 }
 
 function loadScript(url) {
