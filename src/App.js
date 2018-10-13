@@ -5,7 +5,6 @@ import axios from 'axios';
 import Map from './components/Map';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import './responsive.css';
 
 export default class App extends Component {
@@ -22,13 +21,13 @@ export default class App extends Component {
 		hasError: null,
 		errorMsg: null
 	}
-	
+
 	listClickHandler = (item) => {
 		console.log('item clicked');
 		console.log(item);
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
-				window.google.maps.event.trigger(marker, 'click');	
+				window.google.maps.event.trigger(marker, 'click');
 			}
 		})
 	}
@@ -40,13 +39,13 @@ export default class App extends Component {
 			}
 		}
 	}
-	
+
 	toggleMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
 		console.log('open/close event');
 		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
-		
+
 		sidebar.getAttribute('aria-hidden') === 'true' ?
 		sidebar.setAttribute('aria-hidden', 'false') :
 		sidebar.setAttribute('aria-hidden', 'true');
@@ -55,7 +54,7 @@ export default class App extends Component {
 		sidebar.setAttribute('aria-expanded', 'true') :
 		sidebar.setAttribute('aria-expanded', 'false');
 	}
-		
+
 	setQuery = (e) => {
 		this.setState({searchQuery: e});
 		// console.log(e);
@@ -81,25 +80,25 @@ export default class App extends Component {
 			query = query.toLowerCase();
 			listings.forEach( listing => {
 				if((!listing.title.toLowerCase().includes(query)) ) {
-					listing.classList.add('hidden');	
-					console.log(listing.title);				
+					listing.classList.add('hidden');
+					console.log(listing.title);
 				} else{
 					listing.classList.remove('hidden');
 				}
 			})
-			
-			copyMarkers.forEach(marker => marker.title.toLowerCase().includes(query) ? 
-				marker.setVisible(true) : marker.setVisible(false)	
+
+			copyMarkers.forEach(marker => marker.title.toLowerCase().includes(query) ?
+				marker.setVisible(true) : marker.setVisible(false)
 			)
 		}
 		this.setState({markers: copyMarkers});
 		console.table(this.state.markers);
-	}	  
+	}
 
 	loadMap = () => {
 		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
-	}	
+	}
 
 	initMap = () => {
 		let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -113,7 +112,8 @@ export default class App extends Component {
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
-		
+		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
+		let key = '&key=***REMOVED***';
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -127,43 +127,43 @@ export default class App extends Component {
 				key: myVenue.venue.id,
 				isSelected: false
 			})
-			
+
 			bounds.extend(marker.position);
-		
+
 
 		window.google.maps.event.addListener(marker, 'click', () => {
-			let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
-			let key = '&key=***REMOVED***';
+
 			infoWindow.setContent(
 				`<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
 					<img src=${url}${myVenue.venue.location.lat},${myVenue.venue.location.lng}${key} />
-					<p>Category: ${myVenue.venue.categories[0].shortName}</p>			
-					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>	
+					<p>Category: ${myVenue.venue.categories[0].shortName}</p>
+					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>
 				</div>`
 			);
 
-				infoWindow.open(map, marker);
-				(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
-				setTimeout(marker.setAnimation(null), 3000);
-			});	
-			
+			map.panTo(marker.getPosition());
+			infoWindow.open(map, marker);
+			(marker.getAnimation() !== null) ? marker.setAnimation(null) : marker.setAnimation(window.google.maps.Animation.BOUNCE);
+			setTimeout(() => marker.setAnimation(null), 3000);
+		});
+
 			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
 			window.google.maps.event.addListener(marker, 'visible_changed', () => {
 				infoWindow.close();
 			})
-			
+
 			myVenue.marker = marker;
 			markers.push(marker);
 		})
 		this.setState({ markers: markers });
 		this.setState({myVenues: copyOfVenues});
-		
+
 		console.log('updated markers');
 	}
-	
+
 	getPlaces = () => {
 		const endpoint = 'https://api.foursquare.com/v2/venues/explore';
 		console.log('grabbing locations');
@@ -175,7 +175,7 @@ export default class App extends Component {
 				ll: '35.7454,-81.6848',
 				section: 'food',
 				near: 'Morganton'
-			}			
+			}
 		})
 		.then((res) => {
 			console.log("Response from server: " + res.status);
@@ -214,7 +214,7 @@ export default class App extends Component {
 			menuKeyPress={this.menuKeyPress}
 			openMenuKey={this.openMenuKey} />
 
-			<div className='main' role='main'>		
+			<div className='main' role='main'>
 					<Navigation
 						toggleMenu={this.toggleMenu}
 						listKbHandler={this.listKbHandler}
@@ -226,12 +226,12 @@ export default class App extends Component {
 						value={this.state.searchQuery}
 						filterResults={this.filterResults}
 					/>
-					<Map />				
-			</div>			
+					<Map />
+			</div>
 		</div>
-		
+
 	);
-	
+
   }
 }
 
