@@ -19,8 +19,8 @@ export default class App extends Component {
 		markers: [],
 		placesLoaded: false,
 		isLoading: true,
-		hasError: false,
-		errorMsg: ''
+		hasError: null,
+		errorMsg: null
 	}
 	
 	listClickHandler = (item) => {
@@ -178,45 +178,54 @@ export default class App extends Component {
 		.then((res) => {
 			console.log("Response from server: " + res.status);
 			console.log('locations retrieved');
-			this.setState({myVenues: res.data.response.groups[0].items, isLoading: false});
+			this.setState({myVenues: res.data.response.groups[0].items});
 		})
 		.then( () => {
 			this.loadMap();
 		})
-		.catch(error => console.log("Error " + error));
+		.catch(error => {
+			console.log(error);
+			this.setState({hasError: true, errorMsg: error})
+		});
 	}
+
 	componentDidMount() {
 		this.getPlaces();
 	}
-//coment
+
   render() {
-	 
-	 
+	if(this.state.hasError) {
+		return (
+			<div className='errorPage'>
+				<h1 className='oops'>Oops! :(</h1>
+				<h1>Something went wrong.</h1>
+				<h3>Please try again later.</h3>
+				<p>{'Error: ' + this.state.errorMsg.message}</p>
+			</div>
+		);
+	}
+
     return (
-		
 		<div className='App'>
+
 			<Header toggleMenu={this.toggleMenu}
 			menuKeyPress={this.menuKeyPress}
 			openMenuKey={this.openMenuKey} />
-		
-			<div className='main' role='main'>
-			
-				<Navigation
-					toggleMenu={this.toggleMenu}
-					listKbHandler={this.listKbHandler}
-					listClickHandler={this.listClickHandler}
-					myVenues={this.state.myVenues}
-					markers={this.state.markers}
-					searchQuery={this.state.searchQuery}
-					setQuery={this.setQuery}
-					value={this.state.searchQuery}
-					filterResults={this.filterResults}
-				/>
-			
-				<ErrorBoundary>
-					<Map />
-				</ErrorBoundary>
-			</div>
+
+			<div className='main' role='main'>		
+					<Navigation
+						toggleMenu={this.toggleMenu}
+						listKbHandler={this.listKbHandler}
+						listClickHandler={this.listClickHandler}
+						myVenues={this.state.myVenues}
+						markers={this.state.markers}
+						searchQuery={this.state.searchQuery}
+						setQuery={this.setQuery}
+						value={this.state.searchQuery}
+						filterResults={this.filterResults}
+					/>
+					<Map />				
+			</div>			
 		</div>
 		
 	);
@@ -226,8 +235,8 @@ export default class App extends Component {
 
 
 App.propTypes = {
-	myVenues: PropTypes.arrayOf(PropTypes.object),
-	markers: PropTypes.arrayOf(PropTypes.object),
+	myVenues: PropTypes.arrayOf(PropTypes.object).isRequired,
+	markers: PropTypes.arrayOf(PropTypes.object).isRequired,
 	searchQuery: PropTypes.string
 }
 

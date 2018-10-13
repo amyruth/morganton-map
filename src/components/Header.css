@@ -24,7 +24,6 @@ header {
 	border: 2px solid #f5fffa;
 }
 
-
 #nav-icon:hover {
 	color: #D99800;
 	border: 2px solid #D99800;
@@ -34,7 +33,7 @@ header {
 	outline: 2px solid #D99800;
 }
 
-h1{
+header h1{
 	margin-right: 100px;	
 	letter-spacing: 1px;
 }

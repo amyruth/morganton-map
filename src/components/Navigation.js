@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import VenueList from './VenueList';
 import './Navigation.css';
 
-
 export default class Navigation extends Component {
 
 	render() {
