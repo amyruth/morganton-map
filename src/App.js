@@ -15,7 +15,8 @@ export default class App extends Component {
 		},
 		myVenues: [],
 		searchQuery: '',
-		markers: []
+		markers: [],
+		placesLoaded: false
 	}
 	
 	listClickHandler = (item) => {
@@ -173,7 +174,7 @@ export default class App extends Component {
 		.then((res) => {
 			console.log("Response from server: " + res.status);
 			console.log('locations retrieved');
-			this.setState({myVenues: res.data.response.groups[0].items});
+			this.setState({myVenues: res.data.response.groups[0].items, placesLoaded: true});
 		})
 		.then( () => {
 			this.loadMap();
@@ -183,32 +184,6 @@ export default class App extends Component {
 	componentDidMount() {
 		this.getPlaces();
 	}
-
-getPlaces = () => {
-	const endpoint = 'https://api.foursquare.com/v2/venues/explore';
-	console.log('grabbing locations');
-	axios.get(endpoint, {
-		params: {
-			client_id:'***REMOVED***',
-			client_secret: '***REMOVED***',
-			v: 20180922,
-			ll: '35.7454,-81.6848',
-			section: 'food',
-			near: 'Morganton'
-		}			
-	})
-	.then((res) => {
-		console.log("Response from server: " + res.status);
-		console.log('locations retrieved');
-		console.log(res.data.response.groups[0].items);
-		this.setState({myVenues: res.data.response.groups[0].items});
-		console.log(this.state.myVenues);
-	})
-	.then( () => {
-		this.loadMap();
-	})
-	.catch(error => console.log("Error " + error));
-}
 
   render() {
 	 
