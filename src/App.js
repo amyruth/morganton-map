@@ -132,12 +132,14 @@ export default class App extends Component {
 		
 
 		window.google.maps.event.addListener(marker, 'click', () => {
-			
+			let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
+			let key = '&key=***REMOVED***';
 			infoWindow.setContent(
 				`<div class='infoWin'>
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
+					<img src=${url}${myVenue.venue.location.lat},${myVenue.venue.location.lng}${key} />
 					<p>Category: ${myVenue.venue.categories[0].shortName}</p>			
 					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>	
 				</div>`
