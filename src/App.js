@@ -5,6 +5,7 @@ import axios from 'axios';
 import Map from './components/Map';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import './responsive.css';
 
 export default class App extends Component {
@@ -16,7 +17,8 @@ export default class App extends Component {
 		myVenues: [],
 		searchQuery: '',
 		markers: [],
-		placesLoaded: false
+		placesLoaded: false,
+		isLoading: true
 	}
 	
 	listClickHandler = (item) => {
@@ -37,7 +39,7 @@ export default class App extends Component {
 		}
 	}
 	
-	openMenu = () => {
+	toggleMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
 		console.log('open/close event');
 		sidebar.classList.toggle('hide');
@@ -174,7 +176,7 @@ export default class App extends Component {
 		.then((res) => {
 			console.log("Response from server: " + res.status);
 			console.log('locations retrieved');
-			this.setState({myVenues: res.data.response.groups[0].items, placesLoaded: true});
+			this.setState({myVenues: res.data.response.groups[0].items, isLoading: false});
 		})
 		.then( () => {
 			this.loadMap();
@@ -184,38 +186,46 @@ export default class App extends Component {
 	componentDidMount() {
 		this.getPlaces();
 	}
-
+//coment
   render() {
 	 
+	 
     return (
-      <div className='App'>
-		<Header openMenu={this.openMenu}
-		menuKeyPress={this.menuKeyPress}
-		openMenuKey={this.openMenuKey} />
-	
-		<div className='main' role='main'>
-			<Navigation
-				openMenu={this.openMenu}
-				listKbHandler={this.listKbHandler}
-				listClickHandler={this.listClickHandler}
-				myVenues={this.state.myVenues}
-				markers={this.state.markers}
-				searchQuery={this.state.searchQuery}
-				setQuery={this.setQuery}
-				value={this.state.searchQuery}
-				filterResults={this.filterResults}
-			/>
-			<Map />
+		
+		<div className='App'>
+			<Header toggleMenu={this.toggleMenu}
+			menuKeyPress={this.menuKeyPress}
+			openMenuKey={this.openMenuKey} />
+		
+			<div className='main' role='main'>
+			
+				<Navigation
+					toggleMenu={this.toggleMenu}
+					listKbHandler={this.listKbHandler}
+					listClickHandler={this.listClickHandler}
+					myVenues={this.state.myVenues}
+					markers={this.state.markers}
+					searchQuery={this.state.searchQuery}
+					setQuery={this.setQuery}
+					value={this.state.searchQuery}
+					filterResults={this.filterResults}
+				/>
+			
+				<ErrorBoundary>
+					<Map />
+				</ErrorBoundary>
+			</div>
 		</div>
-      </div>
-    );
+		
+	);
+	
   }
 }
 
 
 App.propTypes = {
-	myVenues: PropTypes.arrayOf(PropTypes.object).isRequired,
-	markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+	myVenues: PropTypes.arrayOf(PropTypes.object),
+	markers: PropTypes.arrayOf(PropTypes.object),
 	searchQuery: PropTypes.string
 }
 
