@@ -8,7 +8,7 @@ const Header = (props) => {
 				aria-haspopup='true'
 				aria-controls='main-menu'
 				aria-label='Open and close main menu' 
-				onClick={props.openMenu} 
+				onClick={props.toggleMenu} 
 			>
 				menu
 			</button>
