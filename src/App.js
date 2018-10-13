@@ -18,7 +18,9 @@ export default class App extends Component {
 		searchQuery: '',
 		markers: [],
 		placesLoaded: false,
-		isLoading: true
+		isLoading: true,
+		hasError: false,
+		errorMsg: ''
 	}
 	
 	listClickHandler = (item) => {
