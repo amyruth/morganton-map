@@ -116,7 +116,7 @@ export default class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEY&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -133,7 +133,7 @@ export default class App extends Component {
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
 		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
-		let key = '&key=GOOGLEAPIKEY';
+		let key = '&key=***REMOVED***';
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -158,7 +158,7 @@ export default class App extends Component {
 					<p class='infoTitle'>${myVenue.venue.name}</p>
 					<p>${myVenue.venue.location.formattedAddress[0]}</p>
 					<p>${myVenue.venue.location.formattedAddress[1]}</p>
-					<img src=${url}${myVenue.venue.location.lat},${myVenue.venue.location.lng}${key} />
+					<img src=${url}${myVenue.venue.location.lat},${myVenue.venue.location.lng}${key} alt='${myVenue.venue.name}' />
 					<p>Category: ${myVenue.venue.categories[0].shortName}</p>
 					<a target='_blank' href=https://foursquare.com/v/${myVenue.venue.id}>Get details at Foursquare</a>
 				</div>`
@@ -189,8 +189,8 @@ export default class App extends Component {
 		// console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '4SQUAREID',
-				client_secret: '4SQUARESECRET',
+				client_id: '***REMOVED***',
+				client_secret: '***REMOVED***',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
