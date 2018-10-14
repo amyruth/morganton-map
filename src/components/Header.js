@@ -7,7 +7,7 @@ const Header = (props) => {
 			<button id='nav-icon'
 				aria-haspopup='true'
 				aria-controls='main-menu'
-				aria-label='Open and close main menu' 
+				aria-label='Restaurant menu button' 
 				onClick={props.toggleMenu}
 				
 			>

@@ -8,7 +8,7 @@ const ListItem = props => props.myVenues.map( myVenue =>{
 				title={myVenue.venue.name}
 				onClick={ () => props.listClickHandler(myVenue)}
 				onKeyDown={(e) => {props.listKbHandler(e, myVenue)}}
-				tabIndex='0'
+				tabIndex='-1'
 			>	
 				<div className='venue-listing' role='menuitem'>
 					<p className='venueName'>
@@ -20,10 +20,6 @@ const ListItem = props => props.myVenues.map( myVenue =>{
 		)
 		
 });
-
-ListItem.propTypes = {
-	
-};
 
 export default ListItem;
 

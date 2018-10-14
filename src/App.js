@@ -33,6 +33,8 @@ export default class App extends Component {
 	}
 
 	listKbHandler = (e, item) => {
+		console.log(e.currentTarget);
+		console.log(e.currentTarget.nextSibling);
 		if(e.type === 'keydown') {
 			if(e.keyCode === 13 || e.keyCode === 32) {
 				this.listClickHandler(item);
@@ -48,6 +50,7 @@ export default class App extends Component {
 	}
 	toggleMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
+		let search = document.querySelector('#searchbar');
 		console.log('open/close event');
 	
 		sidebar.classList.toggle('hide');
@@ -60,6 +63,8 @@ export default class App extends Component {
 		sidebar.getAttribute('aria-expanded') === 'false' ?
 		sidebar.setAttribute('aria-expanded', 'true') :
 		sidebar.setAttribute('aria-expanded', 'false');
+
+		search.focus();	
 	}
 
 	setQuery = (e) => {
@@ -245,8 +250,8 @@ export default class App extends Component {
 
 
 App.propTypes = {
-	myVenues: PropTypes.arrayOf(PropTypes.object).isRequired,
-	markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+	myVenues: PropTypes.arrayOf(PropTypes.object),
+	markers: PropTypes.arrayOf(PropTypes.object),
 	searchQuery: PropTypes.string
 }
 
