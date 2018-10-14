@@ -14,7 +14,6 @@ export default class Navigation extends Component {
 					
 						<input type='text' 
 							id='searchbar'
-							aria-label='Search restaurants by name'
 							role='search'
 							placeholder='Search places by name' 
 							value={this.props.searchQuery}
