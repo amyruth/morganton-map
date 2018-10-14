@@ -6,7 +6,9 @@ export default class Navigation extends Component {
 
 	render() {
 		return (
-			<nav className='sidebar hide' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'>
+			<nav className='sidebar hide' id='main-menu' aria-label='Main Navigation' aria-expanded='false' aria-hidden='true'
+			onKeyDown={(e) => this.props.escapeMenu(e)}
+			>
 
 				<div className='search-section'>
 					
