@@ -2,16 +2,19 @@
 	header h1 {
 		text-align: center;
 	}
+
 	.infoTitle {
 		font-size: 16px;
 	}
+
 	.infoWin {
 		font-size: 14px;
-		
 	}
+
 	.venue-listing {
 		width: 200px;
 	}
+
 	.gm-style-iw {
 		width: 300px;
 	}
@@ -21,17 +24,10 @@
 		width: 250px;
 		top: 78px;
 	}
+
 	header h1 {
 		font-size: 20px;
-		/* text-align: center; */
 	}
-	/* .infoTitle {
-		font-size: 18px;
-	}
-	.infoWin {
-		font-size: 16px;
-		width: 200px;
-	} */
 }
 
 @media screen and (min-width: 450px) and (max-width: 525px) {
@@ -46,8 +42,10 @@
 }
 
 @media  screen and (min-width: 1250px) {
-	/* body {
-		width: 1250px;
-		margin: 0 auto;
-	} */
+	.sidebar {
+		position: static;
+		width: 323px;
+		height: calc(100vh - 80px);
+		overflow-y: scroll;
+	}
 }
