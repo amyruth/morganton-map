@@ -40,9 +40,16 @@ export default class App extends Component {
 		}
 	}
 
+	escapeMenu = (e) => {
+		if (e.keyCode === 27) {
+			this.toggleMenu();
+			document.getElementById('nav-icon').focus();
+		}
+	}
 	toggleMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
 		console.log('open/close event');
+	
 		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
 
@@ -225,6 +232,7 @@ export default class App extends Component {
 						setQuery={this.setQuery}
 						value={this.state.searchQuery}
 						filterResults={this.filterResults}
+						escapeMenu={this.escapeMenu}
 					/>
 					<Map />
 			</div>
