@@ -8,7 +8,7 @@ Coded by Amy Rutherford, September - October 2018
 To show information about Morganton, NC's most popular restaurants according to Foursquare. Shows restaurant address, type of cuisine and thumbnail of storefront if available.
 
 ## Live Demo
-[Click here to use the app](https://cocky-boyd-03864b.netlify.com/)
+[Click here to use the app](https://nifty-wright-db1b4c.netlify.com/)
 
 ## Neded for installation/usage
 [NodeJS](https://nodejs.org/en/)
