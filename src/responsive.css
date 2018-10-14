@@ -7,10 +7,13 @@
 	}
 	.infoWin {
 		font-size: 14px;
+		
+	}
+	.venue-listing {
 		width: 200px;
 	}
-	.subtitle {
-		display: none;
+	.gm-style-iw {
+		width: 300px;
 	}
 }
 @media screen and (max-width: 450px) {

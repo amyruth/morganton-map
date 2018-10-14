@@ -78,6 +78,7 @@ html {
 	font-size: 16px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	text-align: center;
 	width: 200px;
 	margin: 15px 0;
@@ -100,6 +101,12 @@ html {
 li {
 	list-style-type: none;
 	border-radius: 10px;
+}
+
+.venue-listing {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .venueName {
 	font-weight: bold;
