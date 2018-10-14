@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 html, body, #root, .App, main {
 	height: 100vh;
 	width: 100%;
@@ -10,6 +11,7 @@ html, body, #root, .App, main {
 #root {
 	overflow: hidden;
 }
+
 .App {
 	display: flex;
 	justify-content: center;
@@ -22,12 +24,14 @@ html {
 	background-color: #fff;
 	display: flex;
 }
+
 .main {
 	display: flex;
 	height: 100%;
 	justify-content: center;
 	background-color: slategrey;
 }
+
 #map {
 	height: calc(100vh - 80px);
 	width: 100%;
@@ -62,6 +66,7 @@ html {
 .infoWin img {
 	margin: 5px 0;
 }
+
 .infoWin p:nth-child(n+2) {
 	margin-top: 3px;
 }
@@ -108,16 +113,11 @@ li {
 	flex-direction: column;
 	justify-content: center;
 }
+
 .venueName {
 	font-weight: bold;
 	margin-bottom: 3px;
 	color: #002a15;
-}
-
-.venueImage {
-	border-radius: 15px 15px 15px;
-	padding: 10px;
-
 }
 
 .errorPage {

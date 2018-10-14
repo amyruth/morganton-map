@@ -19,6 +19,10 @@ label {
 	align-self: center;
 }
 
+#searchbar:focus {
+outline: 3px solid #D99800;
+}
+
 .sidebar {
 	display: flex;
 	flex-direction: column;
@@ -53,7 +57,7 @@ label {
 }
 
 .attribution:hover {
-	border-bottom: 2px solid #99	ddbb;
+	border-bottom: 2px solid #D99800;
 	color: #009048;
 }
 

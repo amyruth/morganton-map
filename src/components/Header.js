@@ -17,10 +17,6 @@ const Header = (props) => {
 			<h1>
 				the morganton meal map
 			</h1>
-		
-		
-
-		
 		</header>
 	);
 };

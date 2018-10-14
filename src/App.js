@@ -1,3 +1,12 @@
+// Mogranton Meal Map by Amy Rutherford
+// 1st submission: October 14, 2018
+
+// Resources used:
+// Elharony's 3rd party library-free start to this project: https://www.youtube.com/playlist?list=PLgOB68PvvmWCGNn8UMTpcfQEiITzxEEA1
+// Ryan Waite's Walktrhough https://www.youtube.com/watch?v=LvQe7xrUh7I&t=2013s
+// w3 on how to implement a menu button https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/js/button.js
+// https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
+
 import React, { Component } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
@@ -23,8 +32,8 @@ export default class App extends Component {
 	}
 
 	listClickHandler = (item) => {
-		console.log('item clicked');
-		console.log(item);
+		// console.log('item clicked');
+		// console.log(item);
 		this.state.markers.forEach(marker => {
 			if(item.venue.id === marker.key) {
 				window.google.maps.event.trigger(marker, 'click');
@@ -33,10 +42,10 @@ export default class App extends Component {
 	}
 
 	listKbHandler = (e, item) => {
-		console.log(e.currentTarget);
-		console.log(e.currentTarget.nextSibling);
+		// console.log(e.currentTarget);
+		// console.log(e.currentTarget.nextSibling);
 		if(e.type === 'keydown') {
-			if(e.keyCode === 13 || e.keyCode === 32) {
+			if(e.keyCode === 13) {
 				this.listClickHandler(item);
 			}
 		}
@@ -51,7 +60,7 @@ export default class App extends Component {
 	toggleMenu = () => {
 		let sidebar = document.querySelector('.sidebar');
 		let search = document.querySelector('#searchbar');
-		console.log('open/close event');
+		// console.log('open/close event');
 	
 		sidebar.classList.toggle('hide');
 		sidebar.classList.toggle('open');
@@ -75,12 +84,11 @@ export default class App extends Component {
 
 	filterResults = (query) => {
 		let listings = document.querySelectorAll('.listing');
-		let venues = this.state.myVenues.map(myVenue => myVenue);
 		let copyMarkers = this.state.markers.map( marker => marker);
 		query = query.toLowerCase();
 
-		console.log('venues copied', venues);
-		console.log('markers copied', copyMarkers);
+		// console.log('venues copied', venues);
+		// console.log('markers copied', copyMarkers);
 		if(query === '') {
 			listings.forEach( listing => {
 				listing.classList.remove('hidden');
@@ -93,7 +101,7 @@ export default class App extends Component {
 			listings.forEach( listing => {
 				if((!listing.title.toLowerCase().includes(query)) ) {
 					listing.classList.add('hidden');
-					console.log(listing.title);
+					// console.log(listing.title);
 				} else{
 					listing.classList.remove('hidden');
 				}
@@ -104,11 +112,11 @@ export default class App extends Component {
 			)
 		}
 		this.setState({markers: copyMarkers});
-		console.table(this.state.markers);
+		// console.table(this.state.markers);
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEY&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -118,7 +126,7 @@ export default class App extends Component {
 			zoom: 13,
 			gestureHandling: 'greedy'
 		})
-		console.log('map is loaded');
+		// console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
 		let infoWindow = new window.google.maps.InfoWindow();
@@ -173,16 +181,16 @@ export default class App extends Component {
 		this.setState({ markers: markers });
 		this.setState({myVenues: copyOfVenues});
 
-		console.log('updated markers');
+		// console.log('updated markers');
 	}
 
 	getPlaces = () => {
 		const endpoint = 'https://api.foursquare.com/v2/venues/explore';
-		console.log('grabbing locations');
+		// console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '***REMOVED***',
-				client_secret: '***REMOVED***',
+				client_id: '4SQUAREID',
+				client_secret: '4SQUARESECRET',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
@@ -190,15 +198,15 @@ export default class App extends Component {
 			}
 		})
 		.then((res) => {
-			console.log("Response from server: " + res.status);
-			console.log('locations retrieved');
+			// console.log("Response from server: " + res.status);
+			// console.log('locations retrieved');
 			this.setState({myVenues: res.data.response.groups[0].items});
 		})
 		.then( () => {
 			this.loadMap();
 		})
 		.catch(error => {
-			console.log(error);
+			// console.log(error);
 			this.setState({hasError: true, errorMsg: error})
 		});
 	}
