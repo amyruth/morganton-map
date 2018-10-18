@@ -116,7 +116,7 @@ export default class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEY&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -126,14 +126,14 @@ export default class App extends Component {
 			zoom: 13,
 			gestureHandling: 'greedy'
 		})
-		// console.log('map is loaded');
+		console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
 		let infoWindow = new window.google.maps.InfoWindow();
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
 		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
-		let key = '&key=GOOGLEAPIKEY';
+		let key = '&key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY';
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -148,8 +148,8 @@ export default class App extends Component {
 				isSelected: false
 			})
 
-			bounds.extend(marker.position);
-
+			bounds.extend(marker.getPosition());
+			console.log(marker);
 
 		window.google.maps.event.addListener(marker, 'click', () => {
 
@@ -170,14 +170,25 @@ export default class App extends Component {
 			setTimeout(() => marker.setAnimation(null), 1000);
 		});
 
-			//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
-			window.google.maps.event.addListener(marker, 'visible_changed', () => {
-				infoWindow.close();
-			})
-
-			myVenue.marker = marker;
-			markers.push(marker);
+		//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
+		window.google.maps.event.addListener(marker, 'visible_changed', () => {
+			infoWindow.close();
 		})
+
+		myVenue.marker = marker;
+		markers.push(marker);
+	});
+
+	//recenters map (experimental)
+	//adjusts zoom to bit all markers on screen
+	window.google.maps.event.addDomListener(window, 'resize', () => {
+		// map.setCenter(this.state.initialCenter);
+		map.fitBounds(bounds);
+	});
+
+	//adjust zoom to fit marker bounds on map load (in case you start on a phone screen)
+	window.google.maps.event.addListener(map, 'tilesloaded', () => map.fitBounds(bounds));
+
 		this.setState({ markers: markers });
 		this.setState({myVenues: copyOfVenues});
 
@@ -189,8 +200,8 @@ export default class App extends Component {
 		// console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '4SQUAREID',
-				client_secret: '4SQUARESECRET',
+				client_id: 'HLAAAV43L3SOYXNORDN3HSWFR3ZDVSX4PT4HOQKJBW2PQF00',
+				client_secret: 'T2GVYKXUO3HRINYCYFPMYAILORVV4T3LOOWY2N4O5QLERGBC',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
@@ -198,9 +209,11 @@ export default class App extends Component {
 			}
 		})
 		.then((res) => {
-			// console.log("Response from server: " + res.status);
+			console.log("Response from server: " + res.status);
 			// console.log('locations retrieved');
-			this.setState({myVenues: res.data.response.groups[0].items});
+			if(res.status === 200){
+				this.setState({myVenues: res.data.response.groups[0].items});
+			}
 		})
 		.then( () => {
 			this.loadMap();
