@@ -7,6 +7,9 @@
 // w3 on how to implement a menu button https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/js/button.js
 // https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
 
+
+// TODO: window.gm_authFailure = ()=>{alert("Please check your Google API key")} Map error handler
+
 import React, { Component } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
@@ -126,7 +129,7 @@ export default class App extends Component {
 			zoom: 13,
 			gestureHandling: 'greedy'
 		})
-		console.log('map is loaded');
+		// console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
 		let infoWindow = new window.google.maps.InfoWindow();
@@ -134,6 +137,7 @@ export default class App extends Component {
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
 		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
 		let key = '&key=AIzaSyCc3E8DG6mm62v4R5R3DZFqCn7et6IgxUY';
+
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
 			let marker = new window.google.maps.Marker({
@@ -149,7 +153,6 @@ export default class App extends Component {
 			})
 
 			bounds.extend(marker.getPosition());
-			console.log(marker);
 
 		window.google.maps.event.addListener(marker, 'click', () => {
 
@@ -170,7 +173,7 @@ export default class App extends Component {
 			setTimeout(() => marker.setAnimation(null), 1000);
 		});
 
-		//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left behind.
+		//This closes the infowindow if the marker is not visible. If I went to the search bar the infowindow was left floating, so I added this to correct the issue.
 		window.google.maps.event.addListener(marker, 'visible_changed', () => {
 			infoWindow.close();
 		})
@@ -180,14 +183,14 @@ export default class App extends Component {
 	});
 
 	//recenters map (experimental)
-	//adjusts zoom to bit all markers on screen
+	//adjusts zoom to fit all markers on screen
 	window.google.maps.event.addDomListener(window, 'resize', () => {
 		// map.setCenter(this.state.initialCenter);
 		map.fitBounds(bounds);
 	});
 
 	//adjust zoom to fit marker bounds on map load (in case you start on a phone screen)
-	window.google.maps.event.addListener(map, 'tilesloaded', () => map.fitBounds(bounds));
+	// window.google.maps.event.addListener(map, 'tilesloaded', () => map.fitBounds(bounds));
 
 		this.setState({ markers: markers });
 		this.setState({myVenues: copyOfVenues});
@@ -195,6 +198,7 @@ export default class App extends Component {
 		// console.log('updated markers');
 	}
 
+	// Map only loads if Foursquare call works
 	getPlaces = () => {
 		const endpoint = 'https://api.foursquare.com/v2/venues/explore';
 		// console.log('grabbing locations');
