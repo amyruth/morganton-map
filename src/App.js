@@ -119,7 +119,7 @@ export default class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEY&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -136,7 +136,7 @@ export default class App extends Component {
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
 		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
-		let key = '&key=***REMOVED***';
+		let key = '&key=GOOGLEAPIKEY';
 
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
@@ -204,8 +204,8 @@ export default class App extends Component {
 		// console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '***REMOVED***',
-				client_secret: '***REMOVED***',
+				client_id: '4SQUAREAPI',
+				client_secret: '4SQUARESECRET',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
