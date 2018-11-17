@@ -7,8 +7,7 @@
 // w3 on how to implement a menu button https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/js/button.js
 // https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
 
-
-// TODO: window.gm_authFailure = ()=>{alert("Please check your Google API key")} Map error handler
+// wanted to use gm_authFailure for map loading error but default google maps error page keeps the rest of the app from loading in an elegant way IMO so I left it out. Trying to do a custom error page looked less clean to me.
 
 import React, { Component } from 'react';
 import './App.css';
@@ -18,6 +17,7 @@ import Map from './components/Map';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
 import './responsive.css';
+
 
 export default class App extends Component {
 	state = {
@@ -31,7 +31,8 @@ export default class App extends Component {
 		placesLoaded: false,
 		isLoading: true,
 		hasError: null,
-		errorMsg: null
+		errorMsg: null,
+		
 	}
 
 	listClickHandler = (item) => {
@@ -213,8 +214,12 @@ export default class App extends Component {
 			}
 		})
 		.then((res) => {
-			console.log("Response from server: " + res.status);
+			console.log(window.navigator.onLine);
+			console.log("Response from 4square server: " + res.status);
 			// console.log('locations retrieved');
+			// if(!window.navigator.onLine){
+			// 	this.setState({hasError: true});
+			// }
 			if(res.status === 200){
 				this.setState({myVenues: res.data.response.groups[0].items});
 			}
@@ -233,7 +238,8 @@ export default class App extends Component {
 	}
 
   render() {
-	if(this.state.hasError) {
+	const { hasError, myVenues, markers, searchQuery } = this.state;
+	if(hasError) {
 		return (
 			<div className='errorPage'>
 				<h1 className='oops'>Oops! :(</h1>
@@ -256,15 +262,17 @@ export default class App extends Component {
 						toggleMenu={this.toggleMenu}
 						listKbHandler={this.listKbHandler}
 						listClickHandler={this.listClickHandler}
-						myVenues={this.state.myVenues}
-						markers={this.state.markers}
-						searchQuery={this.state.searchQuery}
+						myVenues={myVenues}
+						markers={markers}
+						searchQuery={searchQuery}
 						setQuery={this.setQuery}
-						value={this.state.searchQuery}
+						value={searchQuery}
 						filterResults={this.filterResults}
 						escapeMenu={this.escapeMenu}
 					/>
+					
 					<Map />
+				
 			</div>
 		</div>
 
