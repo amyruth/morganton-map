@@ -24,8 +24,12 @@ header {
 	border: 2px solid #f5fffa;
 }
 
-#nav-icon:hover {
+#nav-icon:hover, #nav-icon:focus{
 	color: #D99800;
+	border-color: #D99800;
+}
+
+#nav-icon:hover {
 	border: 2px solid #D99800;
 }
 
