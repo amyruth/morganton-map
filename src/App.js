@@ -120,7 +120,7 @@ export default class App extends Component {
 	}
 
 	loadMap = () => {
-		loadScript('https://maps.googleapis.com/maps/api/js?key=***REMOVED***&callback=initMap');
+		loadScript('https://maps.googleapis.com/maps/api/js?key=GOOGLEAPI&callback=initMap');
 			window.initMap = this.initMap;
 	}
 
@@ -137,7 +137,7 @@ export default class App extends Component {
 		let markers = [];
 		let copyOfVenues = this.state.myVenues.map(venue => venue);
 		let url = 'https://maps.googleapis.com/maps/api/streetview?size=125x125&location=';
-		let key = '&key=***REMOVED***';
+		let key = '&key=GOOGLEAPI';
 
 		//create markers
 		copyOfVenues.forEach(function(myVenue) {
@@ -205,8 +205,8 @@ export default class App extends Component {
 		// console.log('grabbing locations');
 		axios.get(endpoint, {
 			params: {
-				client_id: '***REMOVED***',
-				client_secret: '***REMOVED***',
+				client_id: '4SQUARE',
+				client_secret: '4SQUARE',
 				v: 20180922,
 				ll: '35.7454,-81.6848',
 				section: 'food',
@@ -214,12 +214,8 @@ export default class App extends Component {
 			}
 		})
 		.then((res) => {
-			console.log(window.navigator.onLine);
 			console.log("Response from 4square server: " + res.status);
 			// console.log('locations retrieved');
-			// if(!window.navigator.onLine){
-			// 	this.setState({hasError: true});
-			// }
 			if(res.status === 200){
 				this.setState({myVenues: res.data.response.groups[0].items});
 			}
