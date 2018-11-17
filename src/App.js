@@ -130,7 +130,6 @@ export default class App extends Component {
 			zoom: 13,
 			gestureHandling: 'greedy'
 		})
-		// console.log('map is loaded');
 
 		let bounds = new window.google.maps.LatLngBounds();
 		let infoWindow = new window.google.maps.InfoWindow();
