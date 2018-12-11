@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:700');
+
 header {
-	background-color: #002a15;
+	background-color: var(--maincolor);
 	padding: 20px;
 	height: 45px;
 	width: 100%;
@@ -11,6 +13,7 @@ header {
 }
 
 #nav-icon {
+	font-family: 'Libre Baskerville', serif;
 	font-size: 22px;
 	letter-spacing: 1px;
     cursor: pointer;
@@ -20,21 +23,21 @@ header {
 	border: none;
 	border-radius: 50%;
 	text-decoration: none;
-	background-color: #002a15;
+	background-color: var(--maincolor);
 	border: 2px solid #f5fffa;
 }
 
 #nav-icon:hover, #nav-icon:focus{
-	color: #D99800;
-	border-color: #D99800;
+	color: var(--hovercolor);
+	border-color: var(--hovercolor);
 }
 
 #nav-icon:hover {
-	border: 2px solid #D99800;
+	border: 2px solid var(--hovercolor);
 }
 
 #nav-icon:focus {
-	outline: 2px solid #D99800;
+	outline: 2px solid var(--hovercolor);
 }
 
 header h1{

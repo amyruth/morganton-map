@@ -20,7 +20,7 @@ label {
 }
 
 #searchbar:focus {
-outline: 3px solid #D99800;
+outline: 3px solid var(--hovercolor);
 }
 
 .sidebar {
@@ -29,7 +29,7 @@ outline: 3px solid #D99800;
 	justify-content: center;
 	align-items: center;
 	width: 275px;
-	background-color: #002a15;
+	background-color: var(--maincolor);
 	overflow-y: scroll;
 	position: fixed;
 	z-index: 1;
@@ -53,18 +53,16 @@ outline: 3px solid #D99800;
 	letter-spacing: 1px;
 	margin-top: 2px;
 	padding: 2px 1px 0;
-	color: #f5fffa;
 }
 
 .attribution:hover {
-	border-bottom: 2px solid #D99800;
-	color: #009048;
+	border-bottom: 2px solid var(--hovercolor);
 }
 
 .attribution:visited {
-	color: #D99800;
+	color: var(--hovercolor);
 }
 .attribution:focus {
-	outline: 2px solid #D99800;
+	outline: 2px solid var(--hovercolor);
 	padding: 4px;
 }

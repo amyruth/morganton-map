@@ -1,137 +1,158 @@
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+}
+/* 
+text color #f5fffa
+hover color #d99800
+main bg color  #002a15 
+*/
+
+:root {
+	--maincolor: #1c155a;
+	--hovercolor: #d99800;
+	--textcolor: #F8F8FF;
 }
 
-html, body, #root, .App, main {
-	height: 100vh;
-	width: 100%;
+html,
+body,
+#root,
+.App,
+main {
+  height: 100vh;
+  width: 100%;
 }
 
 #root {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .App {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	height: 100vh;
-	background-color: aqua;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: aqua;
 }
 
 html {
-	background-color: #fff;
-	display: flex;
+  background-color: #fff;
+  display: flex;
 }
 
 .main {
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	background-color: slategrey;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  background-color: slategrey;
 }
 
 #map {
-	height: calc(100vh - 80px);
-	width: 100%;
+  height: calc(100vh - 80px);
+  width: 100%;
 }
 
 .search-section {
-	display: flex;
-	flex-direction: column;
-	padding: 10px;
-	text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  text-align: center;
 }
 
 #searchbar {
-	height: 2rem;
-	width: 225px;
-	margin-top: 10px;
-	font-size: 1rem;
-	align-self: center;
-	border-radius: 5px;
+  height: 2rem;
+  width: 225px;
+  margin-top: 10px;
+  font-size: 1rem;
+  align-self: center;
+  border-radius: 5px;
 }
 
 .infoWin {
-	text-align: center;
-	font-size: 18px;
-	font-weight: 400;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .infoWin img {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
-.infoWin p:nth-child(n+2) {
-	margin-top: 3px;
+.infoWin p:nth-child(n + 2) {
+  margin-top: 3px;
 }
 
 .infoTitle {
-	font-weight: bold;
-	font-size: 24px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .listing {
-	background-color: #f5fffa;
-	border: 1px solid black;
-	padding: 10px;
-	font-size: 16px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	width: 200px;
-	margin: 15px 0;
-	cursor: pointer;
+  background-color: #f5fffa;
+  border: 2px solid black;
+  padding: 10px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  margin: 15px 0;
+  cursor: pointer;
 }
 
 .listing:focus {
-	background-color: #D99800;
-	outline-color: #D99800;
+  background-color: var(--hovercolor);
+  outline-color: var(--hovercolor);
 }
 
 .listing:hover {
-	background-color: #00A856;
+  background-color: var(--maincolor);
+  border: 2px solid var(--textcolor);
+}
+
+.listing:hover p {
+	color: var(--textcolor);
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 li {
-	list-style-type: none;
-	border-radius: 10px;
+  list-style-type: none;
+  border-radius: 10px;
 }
 
 .venue-listing {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .venueName {
-	font-weight: bold;
-	margin-bottom: 3px;
-	color: #002a15;
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: var(--maincolor);
 }
 
 .errorPage {
-	height: 600px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.errorPage h1, .errorPage h3 {
-	margin-bottom: 20px;
+.errorPage h1,
+.errorPage h3 {
+  margin-bottom: 20px;
 }
 
 .oops {
-	font-size: 100px;
+  font-size: 100px;
 }
