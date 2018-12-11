@@ -9,7 +9,7 @@ header {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	color: #f5fffa;
+	color: var(--textcolor);
 }
 
 #nav-icon {
@@ -18,13 +18,13 @@ header {
 	letter-spacing: 1px;
     cursor: pointer;
 	margin-right: 20px;
-    color: #f5fffa;
+    color: var(--textcolor);
     padding: 10px 15px;
 	border: none;
 	border-radius: 50%;
 	text-decoration: none;
 	background-color: var(--maincolor);
-	border: 2px solid #f5fffa;
+	border: 2px solid var(--textcolor);
 }
 
 #nav-icon:hover, #nav-icon:focus{
